@@ -33,6 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -56,6 +57,7 @@
     <Compile Include="Inmueble.cs" />
     <Compile Include="InmuebleEdificado.cs" />
     <Compile Include="Operaciones.cs" />
+    <Compile Include="OperacionesSql.cs" />
     <Compile Include="Persona.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicio.cs" />

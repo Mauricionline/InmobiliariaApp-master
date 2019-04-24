@@ -4,7 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
+namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.Comun
 {
     /// <summary>
     /// Clase que nos sirve para ejecutar operaciones en el servidor de base de datos
@@ -22,21 +22,21 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
         public static SqlCommand CreateBasicCommand()
         {
             SqlConnection connection = new SqlConnection(_connectionString);
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = connection;
-            return cmd;
-        }
-
-
-        /// <summary>
-        /// Retorna el objeto de la conexion a la base de datos
-        /// </summary>
-        /// <returns></returns>
-        public static SqlConnection ObtenerConexion()
-        {
+            SqlCommand cmd = new SqlCommand();                              
+            cmd.Connection = connection;                                        
+            return cmd;                                                     
+        }                                                                   
+                                                                            
+                                                                            
+        /// <summary>                                                       
+        /// Retorna el objeto de la conexion a la base de datos             
+        /// </summary>                                                      
+        /// <returns></returns>                                             
+        public static SqlConnection ObtenerConexion()                       
+        {                                                                   
             SqlConnection connection = new SqlConnection(_connectionString);
-            return connection;
-        }
+            return connection;                                              
+        }                                                                   
 
 
         /// <summary>
