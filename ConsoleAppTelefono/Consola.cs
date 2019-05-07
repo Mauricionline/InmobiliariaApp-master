@@ -45,19 +45,34 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.ConsoleAppTelefono
 
             PersonaBrl.PersonaBrl.Insertar(persona);
         }*/
+        //static void Main(string[] args)
+        //{
+        //    Cuenta cuenta = new Cuenta()
+        //    {
+        //       Usuario  = "Mauricionline",
+        //       Contrasena = "12345",
+        //        idPersona = new Persona()
+        //        {
+        //            IdPersona = 2,
+        //        },
+        //    };
+
+        //    PersonaBrl.CuentaBrl.Insertar(cuenta);
+        //}
         static void Main(string[] args)
         {
-            Cuenta cuenta = new Cuenta()
+            Direccion direccion = new Direccion()
             {
-               Usuario  = "Mauricionline",
-               Contrasena = "12345",
-                idPersona = new Persona()
+                NombreDireccion = "Av. Aroma",               
+
+                IdPersona = new Persona()
                 {
                     IdPersona = 2,
-                },
+                },       
+                
             };
 
-            PersonaBrl.CuentaBrl.Insertar(cuenta);
+            PersonaBrl.DireccionPersonaBrl.Insertar(direccion);
         }
     }
 }

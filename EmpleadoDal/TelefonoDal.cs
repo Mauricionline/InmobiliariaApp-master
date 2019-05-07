@@ -6,6 +6,9 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
 {
     public class TelefonoDal
     {
+        const string NOMBRE = "Telefono";
+        const string NOMBREDAL = "TelefonoDal";
+
         /// <summary>
         /// Inserta un telefono a la base de datos 
         /// </summary>

@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.Comun
 {
     /// <summary>
-    /// Clase que me permite crear un objeto de la clase Direccion
+    /// Clase que me permite heredar los atributos de una direccion
+    /// Esta clase no se puede crear por que es abstracta
     /// </summary>
-    public class Direccion
+    public abstract class Direccion
     {
         #region
         /// <summary>
@@ -20,24 +20,14 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.Comun
         public string NombreDireccion { get; set; }
 
         /// <summary>
-        /// identificador de la persona
-        /// </summary>
-        public List<Persona> IdPersona { get; set; }
-
-        /// <summary>
-        /// identificador del inmueble
-        /// </summary>
-        public Inmueble IdInmueble { get; set; }
-
-        /// <summary>
         ///  Estado para ver si la direccion es activo,inactivo, etc.
         /// </summary>
-        private byte estadoModificaion { get; set; }
+        public byte estadoModificaion { get; set; }
 
         /// <summary>
         /// Fecha de modificacion de la direccion
         /// </summary>
-        private DateTime fechaModificacion { get; set; }
+        public DateTime fechaModificacion { get; set; }
         #endregion
     }
 }

@@ -8,33 +8,29 @@ using Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.Comun;
 
 namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
 {
-    
-    public class PersonaDal
-    {
-        const string NOMBRE = "Persona";
-        const string NOMBREDAL = "PersonaDal";
+    public class DireccionPersonaDal
+    {                   ///IMPORTANTE DEBO VERIFICAR SI LAS CONSULTAS ESTAN BIEN POR QUE YA NO ES DIRECCION AHORA ES DIRECCIONPERSONA
+        const string NOMBRE = "Direccion";
+        const string NOMBREDAL = "DireccionDal";
         /// <summary>
         /// Inserta un telefono a la base de datos 
-        /// </summary>       
-        /// <param name="idPersona"></param>
-
-        public static void Insertar(Persona persona)
+        /// </summary>
+        /// <param name="direccionPersona"></param>        
+        public static void Insertar(DireccionPersona direccionPersona)
         {
-            Operaciones.WriteLogsDebug(NOMBREDAL, "Insertar", string.Format("{0} Info: {1}",
+            Operaciones.WriteLogsDebug("DireccionDal", "Insertar", string.Format("{0} Info: {1}",
             DateTime.Now.ToString(), "Empezando a ejecutar el metodo acceso a datos para crear una "+NOMBRE));
 
             SqlCommand command = null;
 
-            //Consulta para insertar telefonos
-            string queryString = @"INSERT INTO Persona(nombres, primerApellido, segundoApellido, carnet, estadoModificacion) 
-                                    VALUES(@nombres, @primerApellido,@segundoApellido, @carnet, @estadoModificacion)";
+            //Consulta para insertar Direccion
+            string queryString = @"INSERT INTO Direccion(nombreDireccion, idPersona, estadoModificacion) 
+                                    VALUES(@nombreDireccion, @idPersona, @estadoModificacion)";
             try
             {
                 command = OperacionesSql.CreateBasicCommand(queryString);
-                command.Parameters.AddWithValue("@nombres", persona.Nombres);
-                command.Parameters.AddWithValue("@primerApellido", persona.PrimerApellido);
-                command.Parameters.AddWithValue("@segundoApellido", persona.SegundoApellido);
-                command.Parameters.AddWithValue("@carnet", persona.Carnet);
+                command.Parameters.AddWithValue("@nombreDireccion", direccionPersona.NombreDireccion);
+                command.Parameters.AddWithValue("@idPersona", direccionPersona.IdPersona.IdPersona);
                 command.Parameters.AddWithValue("@estadoModificacion", 0);
                 OperacionesSql.ExecuteBasicCommand(command);
             }
@@ -55,25 +51,23 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
         }
 
         /// <summary>
-        /// Inserta un Email a la base de datos y devuelve el ID, aparte me devuelve el comando
+        /// Inserta una direccion a la base de datos y devuelve el ID, aparte me devuelve el comando
         /// </summary>
-        /// <param name=Persona></param>        
-        public static SqlCommand InsertarOUTPUT(Persona persona)
+        /// <param name="Direccion"></param>        
+        public static SqlCommand InsertarOUTPUT(DireccionPersona direccionPersona)
         {
             Operaciones.WriteLogsDebug(NOMBREDAL, "Insertar", string.Format("{0} Info: {1}",
-            DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para crear un "+NOMBRE));
+            DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para crear una "+ NOMBRE));
 
             SqlCommand command = null;
 
-            //Consulta para insertar Persona
-            string queryString = @"INSERT INTO Persona(nombres, primerApellido, segundoApellido, carnet, estadoModificacion) 
-                                            VALUES(@nombres, @primerApellido,@segundoApellido, @carnet, @estadoModificacion)";
+            //Consulta para insertar telefonos
+            string queryString = @"INSERT INTO Direccion(nombreDireccion, idPersona,idInmueble, estadoModificacion)
+                                            VALUES(@nombreDireccion, @idPersona, @estadoModificacion)";
 
             command = new SqlCommand(queryString);
-            command.Parameters.AddWithValue("@nombres", persona.Nombres);
-            command.Parameters.AddWithValue("@primerApellido", persona.PrimerApellido);
-            command.Parameters.AddWithValue("@segundoApellido", persona.SegundoApellido);
-            command.Parameters.AddWithValue("@carnet", persona.Carnet);
+            command.Parameters.AddWithValue("@nombreDireccion", direccionPersona.NombreDireccion);
+            command.Parameters.AddWithValue("@idPersona", direccionPersona.IdPersona.IdPersona);            
             command.Parameters.AddWithValue("@estadoModificacion", 0);
 
             return command;
@@ -81,22 +75,22 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
         }
 
         /// <summary>
-        /// Elimina Persona de la base de datos
+        /// Elimina Direccion de la base de datos
         /// </summary>
         /// <param name="id"></param>
         public static void Eliminar(int id)
         {
-            Operaciones.WriteLogsDebug(NOMBREDAL, "Eliminar", string.Format("{0} Info: {1}", DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para eliminar un "+NOMBRE));
+            Operaciones.WriteLogsDebug(NOMBREDAL, "Eliminar", string.Format("{0} Info: {1}", DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para eliminar una "+ NOMBRE));
 
             SqlCommand command = null;
 
             // Proporcionar la cadena de consulta 
-            string queryString = @"UPDATE Persona SET estadoModificacion=1
-                                    WHERE idPersona = @idPersona";
+            string queryString = @"UPDATE Direccion SET estadoModificacion=1
+                                    WHERE idInmueble = @idInmueble";
             try
             {
                 command = OperacionesSql.CreateBasicCommand(queryString);
-                command.Parameters.AddWithValue("@idPersona", id);
+                command.Parameters.AddWithValue("@idInmueble", id);
                 OperacionesSql.ExecuteBasicCommand(command);
             }
             catch (SqlException ex)
@@ -110,32 +104,28 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
                 throw ex;
             }
 
-            Operaciones.WriteLogsDebug(NOMBREDAL, "Eliminar", string.Format("{0} {1} Info: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Termino de ejecutar  el metodo acceso a datos para Eliminar un "+NOMBRE));
+            Operaciones.WriteLogsDebug(NOMBREDAL, "Eliminar", string.Format("{0} {1} Info: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Termino de ejecutar  el metodo acceso a datos para Eliminar una" + NOMBRE));
         }
 
         /// <summary>
-        /// Actualiza Persona de la base de datos
+        /// Actualiza telefono de la base de datos
         /// </summary>
-        /// <param name="Persona"></param>
-        public static void Actualizar(Persona persona)
+        /// <param name="telefono"></param>
+        public static void Actualizar(DireccionPersona direccionPersona)
         {
-            Operaciones.WriteLogsDebug(NOMBREDAL, "Eliminar", string.Format("{0} Info: {1}", DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para eliminar un "+NOMBRE));
+            Operaciones.WriteLogsDebug(NOMBREDAL, "Eliminar", string.Format("{0} Info: {1}", DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para eliminar una" + NOMBRE));
 
             SqlCommand command = null;
 
             // Proporcionar la cadena de consulta 
-            string queryString = @"UPDATE Persona 
-                                   SET nombres=@nombres, primerApellido=@primerApellido,
-                                   segundoApellido=@segundoApellido,carnet=@carnet
-                                   WHERE idPersona=@idPersona";
+            string queryString = @"UPDATE Direccion SET nombreDireccion=@nombreDireccion
+                                    WHERE idDireccion = @idDireccion";
             try
             {
 
                 command = OperacionesSql.CreateBasicCommand(queryString);
-                command.Parameters.AddWithValue("@nombres", persona.Nombres);
-                command.Parameters.AddWithValue("@primerApellido", persona.PrimerApellido);
-                command.Parameters.AddWithValue("@segundoApellido", persona.SegundoApellido);
-                command.Parameters.AddWithValue("@carnet", persona.Carnet);
+                command.Parameters.AddWithValue("@nombreDireccion", direccionPersona.NombreDireccion);
+                command.Parameters.AddWithValue("@idDireccion", direccionPersona.IdDireccion);
                 OperacionesSql.ExecuteBasicCommand(command);
             }
             catch (SqlException ex)
@@ -149,21 +139,21 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
                 throw ex;
             }
 
-            Operaciones.WriteLogsDebug(NOMBREDAL, "Eliminar", string.Format("{0} {1} Info: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Termino de ejecutar  el metodo acceso a datos para Eliminar un "+NOMBREDAL));
+            Operaciones.WriteLogsDebug(NOMBREDAL, "Eliminar", string.Format("{0} {1} Info: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Termino de ejecutar  el metodo acceso a datos para Eliminar una "+NOMBRE));
 
         }
 
         /// <summary>
-        /// Obtiene una Persona de la base de datos
+        /// Obtiene una Direccion de la base de datos
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static Persona Obtener(int id)
+        public static Direccion Obtener(int id)
         {
-            Persona res = new Persona();
+            DireccionPersona res = new DireccionPersona();
             SqlCommand cmd = null;
             SqlDataReader dr = null;
-            string query = @"SELECT * FROM Persona WHERE idPersona=@id and estadoModificacion=0";
+            string query = @"SELECT * FROM Direccion WHERE idDireccion=@id and estadoModificacion=0";
             try
             {
                 cmd = OperacionesSql.CreateBasicCommand(query);
@@ -171,13 +161,10 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
                 dr = OperacionesSql.ExecuteDataReaderCommand(cmd);
                 while (dr.Read())
                 {
-                    res = new Persona()
+                    res = new DireccionPersona()
                     {
-                        IdPersona = dr.GetInt32(0),
-                        Nombres = dr.GetString(1),
-                        PrimerApellido = dr.GetString(2),
-                        SegundoApellido = dr.GetString(3),
-                        Carnet = dr.GetString(4),
+                        IdDireccion = dr.GetInt32(0),
+                        NombreDireccion = dr.GetString(1),
                     };
                 }
             }

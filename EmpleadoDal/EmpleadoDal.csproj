@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CuentaDal.cs" />
+    <Compile Include="DireccionPersonaDal.cs" />
     <Compile Include="EmailDal.cs" />
     <Compile Include="PersonaDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

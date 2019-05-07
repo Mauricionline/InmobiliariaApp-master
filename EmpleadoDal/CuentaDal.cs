@@ -53,7 +53,7 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
         /// Inserta un Cuenta a la base de datos y devuelve el ID, aparte me devuelve el comando
         /// </summary>
         /// <param name="Cuenta"></param>
-        /// <param name="idPersona"></param>
+        /// <param name="idPersona"></param>        
         public static SqlCommand InsertarOUTPUT(Cuenta cuenta)
         {
             Operaciones.WriteLogsDebug("CuentaDal", "Insertar", string.Format("{0} Info: {1}",

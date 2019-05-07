@@ -3,7 +3,7 @@
     /// <summary>
     /// Clase que me permite crear objetos de la clase CuentaEmpleado
     /// </summary>
-    public class CuentaEmpleado :Cuenta
+    public class CuentaEmpleado : Cuenta
     {
         #region
         /// <summary>
