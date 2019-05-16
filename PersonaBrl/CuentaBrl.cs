@@ -1,24 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.Comun;
 
 namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.PersonaBrl
 {
     public class CuentaBrl
     {
+        const string NOMBRE = "Cuenta";
+        const string NOMBREBRL = "CuentaBrl";
         /// <summary>
         /// Metodo logica de negocio para insertar un telefono
         /// </summary>
-        /// <param name="telefono"></param>
+        /// <param name="cuenta"></param>
         public static void Insertar(Cuenta cuenta)
         {
-            Operaciones.WriteLogsDebug("CuentaBrl", "Insertar", string.Format("{0} Info: {1}",
+            Operaciones.WriteLogsDebug(NOMBREBRL, "Insertar", string.Format("{0} Info: {1}",
             DateTime.Now.ToLongDateString(),
-            "Empezando a ejecutar el metodo logica de negocio para crear una Cuenta"));
+            "Empezando a ejecutar el metodo logica de negocio para crear una "+NOMBRE));
 
             try
             {
@@ -27,20 +25,20 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.PersonaBrl
             }
             catch (SqlException ex)
             {
-                Operaciones.WriteLogsRelease("CuentaBrl", "Insertar", string.Format("{0} {1} Error: {2}",
+                Operaciones.WriteLogsRelease(NOMBREBRL, "Insertar", string.Format("{0} {1} Error: {2}",
                     DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
             catch (Exception ex)
             {
-                Operaciones.WriteLogsRelease("CuentaBrl", "Insertar", string.Format("{0} {1} Error: {2}",
+                Operaciones.WriteLogsRelease(NOMBREBRL, "Insertar", string.Format("{0} {1} Error: {2}",
                     DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
 
-            Operaciones.WriteLogsDebug("CuentaBrl", "Insertar", string.Format("{0} {1} Info: {2}",
+            Operaciones.WriteLogsDebug(NOMBREBRL, "Insertar", string.Format("{0} {1} Info: {2}",
                 DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(),
-                "Termino de ejecutar  el metodo logica de negocio para insertar Cuenta"));
+                "Termino de ejecutar  el metodo logica de negocio para insertar " + NOMBRE));
 
         }
 
@@ -50,9 +48,9 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.PersonaBrl
         /// <param name="Cuenta"></param>
         public static void Actualizar(Cuenta cuenta)
         {
-            Operaciones.WriteLogsDebug("CuentaBrl", "Actualizar", string.Format("{0} Info: {1}",
+            Operaciones.WriteLogsDebug(NOMBREBRL, "Actualizar", string.Format("{0} Info: {1}",
             DateTime.Now.ToLongDateString(),
-            "Empezando a ejecutar el metodo logica de negocio para crear un CuentaBrl"));
+            "Empezando a ejecutar el metodo logica de negocio para crear un "+ NOMBRE));
 
             try
             {
@@ -60,20 +58,20 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.PersonaBrl
             }
             catch (SqlException ex)
             {
-                Operaciones.WriteLogsRelease("CuentaBrl", "Actualizar", string.Format("{0} {1} Error: {2}",
+                Operaciones.WriteLogsRelease(NOMBREBRL, "Actualizar", string.Format("{0} {1} Error: {2}",
                     DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
             catch (Exception ex)
             {
-                Operaciones.WriteLogsRelease("CuentaBrl", "Actualizar", string.Format("{0} {1} Error: {2}",
+                Operaciones.WriteLogsRelease(NOMBREBRL, "Actualizar", string.Format("{0} {1} Error: {2}",
                     DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
 
-            Operaciones.WriteLogsDebug("CuentaBrl", "Actualizar", string.Format("{0} {1} Info: {2}",
+            Operaciones.WriteLogsDebug(NOMBREBRL, "Actualizar", string.Format("{0} {1} Info: {2}",
                 DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(),
-                "Termino de ejecutar  el metodo logica de negocio para actualizar Cuenta"));
+                "Termino de ejecutar  el metodo logica de negocio para actualizar "+NOMBRE));
         }
 
         /// <summary>
@@ -82,9 +80,9 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.PersonaBrl
         /// <param name="Cuenta"></param>
         public static void Eliminar(int id)
         {
-            Operaciones.WriteLogsDebug("CuentaBrl", "Eliminar", string.Format("{0} Info: {1}",
+            Operaciones.WriteLogsDebug(NOMBREBRL, "Eliminar", string.Format("{0} Info: {1}",
             DateTime.Now.ToLongDateString(),
-            "Empezando a ejecutar el metodo logica de negocio para Eliminar una Cuenta"));
+            "Empezando a ejecutar el metodo logica de negocio para Eliminar una "+NOMBRE));
 
             try
             {
@@ -92,20 +90,20 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.PersonaBrl
             }
             catch (SqlException ex)
             {
-                Operaciones.WriteLogsRelease("CuentaBrl", "Eliminar", string.Format("{0} {1} Error: {2}",
+                Operaciones.WriteLogsRelease(NOMBREBRL, "Eliminar", string.Format("{0} {1} Error: {2}",
                     DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
             catch (Exception ex)
             {
-                Operaciones.WriteLogsRelease("CuentaBrl", "Eliminar", string.Format("{0} {1} Error: {2}",
+                Operaciones.WriteLogsRelease(NOMBREBRL, "Eliminar", string.Format("{0} {1} Error: {2}",
                     DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
 
-            Operaciones.WriteLogsDebug("CuentaBrl", "Eliminar", string.Format("{0} {1} Info: {2}",
+            Operaciones.WriteLogsDebug(NOMBREBRL, "Eliminar", string.Format("{0} {1} Info: {2}",
                 DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(),
-                "Termino de ejecutar  el metodo logica de negocio para Eliminar telefono"));
+                "Termino de ejecutar  el metodo logica de negocio para Eliminar "+NOMBRE));
         }
 
         /// <summary>
@@ -114,9 +112,9 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.PersonaBrl
         /// <param name="telefono"></param>
         public static Cuenta Obtener(int id)
         {
-            Operaciones.WriteLogsDebug("CuentaBrl", "Obtener", string.Format("{0} Info: {1}",
+            Operaciones.WriteLogsDebug(NOMBREBRL, "Obtener", string.Format("{0} Info: {1}",
             DateTime.Now.ToLongDateString(),
-            "Empezando a ejecutar el metodo logica de negocio para Obtener un Cuenta"));
+            "Empezando a ejecutar el metodo logica de negocio para Obtener un "+NOMBRE));
 
             try
             {
@@ -124,13 +122,38 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.PersonaBrl
             }
             catch (SqlException ex)
             {
-                Operaciones.WriteLogsRelease("CuentaBrl", "Obtener", string.Format("{0} {1} Error: {2}",
+                Operaciones.WriteLogsRelease(NOMBREBRL, "Obtener", string.Format("{0} {1} Error: {2}",
                     DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
             catch (Exception ex)
             {
-                Operaciones.WriteLogsRelease("CuentaBrl", "Obtener", string.Format("{0} {1} Error: {2}",
+                Operaciones.WriteLogsRelease(NOMBREBRL, "Obtener", string.Format("{0} {1} Error: {2}",
+                    DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                throw ex;
+            }
+        }
+
+
+        public static int verificar_cuenta(Cuenta cuenta)
+        {
+            Operaciones.WriteLogsDebug(NOMBREBRL, "verificar_existe", string.Format("{0} Info: {1}",
+            DateTime.Now.ToLongDateString(),
+            "Empezando a ejecutar el metodo logica de negocio para verificar si una cuenta existe"));
+
+            try
+            {
+                return EmpleadoDal.CuentaDal.verificar_cuenta(cuenta);
+            }
+            catch (SqlException ex)
+            {
+                Operaciones.WriteLogsRelease(NOMBREBRL, "verificar_existe", string.Format("{0} {1} Error: {2}",
+                    DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                Operaciones.WriteLogsRelease(NOMBREBRL, "verificar_existe", string.Format("{0} {1} Error: {2}",
                     DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }

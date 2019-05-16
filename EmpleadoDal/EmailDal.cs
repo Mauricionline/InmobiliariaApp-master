@@ -85,7 +85,7 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
 
             // Proporcionar la cadena de consulta 
             string queryString = @"UPDATE Email SET estadoModificacion=1
-                                    WHERE idTelefono = @idTelefono";
+                                    WHERE idEmail = @idEmail";
             try
             {
                 command = OperacionesSql.CreateBasicCommand(queryString);

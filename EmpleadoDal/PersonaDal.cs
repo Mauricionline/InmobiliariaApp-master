@@ -26,14 +26,15 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
             SqlCommand command = null;
 
             //Consulta para insertar telefonos
-            string queryString = @"INSERT INTO Persona(nombres, primerApellido, segundoApellido, carnet, estadoModificacion) 
-                                    VALUES(@nombres, @primerApellido,@segundoApellido, @carnet, @estadoModificacion)";
+            string queryString = @"INSERT INTO Persona(nombres, primerApellido, segundoApellido, cargo, carnet, estadoModificacion) 
+                                    VALUES(@nombres, @primerApellido,@segundoApellido, @cargo, @carnet, @estadoModificacion)";
             try
             {
                 command = OperacionesSql.CreateBasicCommand(queryString);
                 command.Parameters.AddWithValue("@nombres", persona.Nombres);
                 command.Parameters.AddWithValue("@primerApellido", persona.PrimerApellido);
                 command.Parameters.AddWithValue("@segundoApellido", persona.SegundoApellido);
+                command.Parameters.AddWithValue("@cargo", persona.Cargo);
                 command.Parameters.AddWithValue("@carnet", persona.Carnet);
                 command.Parameters.AddWithValue("@estadoModificacion", 0);
                 OperacionesSql.ExecuteBasicCommand(command);
@@ -66,13 +67,14 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
             SqlCommand command = null;
 
             //Consulta para insertar Persona
-            string queryString = @"INSERT INTO Persona(nombres, primerApellido, segundoApellido, carnet, estadoModificacion) 
-                                            VALUES(@nombres, @primerApellido,@segundoApellido, @carnet, @estadoModificacion)";
+            string queryString = @"INSERT INTO Persona(nombres, primerApellido, segundoApellido, cargo, carnet, estadoModificacion) 
+                                            VALUES(@nombres, @primerApellido,@segundoApellido, @cargo, @carnet, @estadoModificacion)";
 
             command = new SqlCommand(queryString);
             command.Parameters.AddWithValue("@nombres", persona.Nombres);
             command.Parameters.AddWithValue("@primerApellido", persona.PrimerApellido);
             command.Parameters.AddWithValue("@segundoApellido", persona.SegundoApellido);
+            command.Parameters.AddWithValue("@cargo", persona.Cargo);
             command.Parameters.AddWithValue("@carnet", persona.Carnet);
             command.Parameters.AddWithValue("@estadoModificacion", 0);
 
@@ -91,7 +93,7 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
             SqlCommand command = null;
 
             // Proporcionar la cadena de consulta 
-            string queryString = @"UPDATE Persona SET estadoModificacion=1
+            string queryString = @"UPDATE Persona SET estadoModificacion = 1
                                     WHERE idPersona = @idPersona";
             try
             {
@@ -125,31 +127,31 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
 
             // Proporcionar la cadena de consulta 
             string queryString = @"UPDATE Persona 
-                                   SET nombres=@nombres, primerApellido=@primerApellido,
-                                   segundoApellido=@segundoApellido,carnet=@carnet
+                                   SET nombres=@nombres, primerApellido=@primerApellido,segundoApellido=@segundoApellido, cargo = @cargo,carnet=@carnet
                                    WHERE idPersona=@idPersona";
             try
             {
-
                 command = OperacionesSql.CreateBasicCommand(queryString);
                 command.Parameters.AddWithValue("@nombres", persona.Nombres);
                 command.Parameters.AddWithValue("@primerApellido", persona.PrimerApellido);
                 command.Parameters.AddWithValue("@segundoApellido", persona.SegundoApellido);
+                command.Parameters.AddWithValue("@cargo", persona.Cargo);
                 command.Parameters.AddWithValue("@carnet", persona.Carnet);
+                command.Parameters.AddWithValue("@idPersona", persona.IdPersona);
                 OperacionesSql.ExecuteBasicCommand(command);
             }
             catch (SqlException ex)
             {
-                Operaciones.WriteLogsRelease(NOMBREDAL, "Eliminar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                Operaciones.WriteLogsRelease(NOMBREDAL, "Actualizar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
             catch (Exception ex)
             {
-                Operaciones.WriteLogsRelease(NOMBREDAL, "Eliminar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                Operaciones.WriteLogsRelease(NOMBREDAL, "Actualizar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
 
-            Operaciones.WriteLogsDebug(NOMBREDAL, "Eliminar", string.Format("{0} {1} Info: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Termino de ejecutar  el metodo acceso a datos para Eliminar un "+NOMBREDAL));
+            Operaciones.WriteLogsDebug(NOMBREDAL, "Actualizar", string.Format("{0} {1} Info: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Termino de ejecutar  el metodo acceso a datos para Eliminar un "+NOMBREDAL));
 
         }
 
@@ -177,7 +179,8 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
                         Nombres = dr.GetString(1),
                         PrimerApellido = dr.GetString(2),
                         SegundoApellido = dr.GetString(3),
-                        Carnet = dr.GetString(4),
+                        Cargo = dr.GetByte(4),
+                        Carnet = dr.GetString(5),
                     };
                 }
             }

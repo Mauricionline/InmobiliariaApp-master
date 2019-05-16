@@ -37,7 +37,6 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.PersonaBrl
             Operaciones.WriteLogsDebug("TelefonoBrl", "Insertar", string.Format("{0} {1} Info: {2}",
                 DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(),
                 "Termino de ejecutar  el metodo logica de negocio para insertar telefono"));
-
         }
 
         /// <summary>

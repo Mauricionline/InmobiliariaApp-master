@@ -180,5 +180,69 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
             }
             return res;
         }
+        public static int verificar_cuenta(Cuenta cuenta)
+        {            
+            SqlCommand cmd = null;
+            int cantidad_encontrados;
+            int num;
+
+            string query = @"SELECT * FROM Cuenta WHERE usuario=@usuario";
+            try
+            {
+                cmd = OperacionesSql.CreateBasicCommand(query);
+                cmd.Parameters.AddWithValue("@usuario", cuenta.Usuario);
+                cantidad_encontrados = OperacionesSql.ExcecuteDataTableCommand(cmd).Rows.Count;
+
+                if (cantidad_encontrados == 1)
+                {
+                    query = @"SELECT * FROM Cuenta WHERE contrasena=@contrasena and usuario=@usuario";
+
+                    cmd = OperacionesSql.CreateBasicCommand(query);
+                    cmd.Parameters.AddWithValue("@contrasena", cuenta.Contrasena);
+                    cmd.Parameters.AddWithValue("@usuario", cuenta.Usuario);
+                    cantidad_encontrados = OperacionesSql.ExcecuteDataTableCommand(cmd).Rows.Count;
+
+                    if (cantidad_encontrados == 1)
+                    {
+                        query = @"SELECT * FROM Cuenta WHERE contrasena=@contrasena and usuario=@usuario and estadoModificacion=0";
+
+                        cmd = OperacionesSql.CreateBasicCommand(query);
+                        cmd.Parameters.AddWithValue("@contrasena", cuenta.Contrasena);
+                        cmd.Parameters.AddWithValue("@usuario", cuenta.Usuario);
+                        cantidad_encontrados = OperacionesSql.ExcecuteDataTableCommand(cmd).Rows.Count;
+
+                        if (cantidad_encontrados == 1)
+                        {
+                            num = 0; //si devuelve 0 la cuenta esta habilitada correctamente
+                        }
+                        else
+                        {
+                            num = 3;  //si devuelve 1 encontro la cuenta y la contraseña pero la cuenta no esta habilitada
+                        }
+                    }
+                    else
+                    {
+                        num = 2; //si devuelve 1 encontro la cuenta pero no la contraseña
+                    }
+                }
+                else
+                {
+
+                    num = 1; //si devuelve 1 no encontro la cuenta 
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                Operaciones.WriteLogsRelease("CuentaDal", "verificar_existe", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                throw ex;
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+            return num;
+        }
     }
 }

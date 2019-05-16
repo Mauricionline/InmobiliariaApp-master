@@ -24,7 +24,7 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
             SqlCommand command = null;
 
             //Consulta para insertar Direccion
-            string queryString = @"INSERT INTO Direccion(nombreDireccion, idPersona, estadoModificacion) 
+            string queryString = @"INSERT INTO DireccionPersona(nombreDireccion, idPersona, estadoModificacion) 
                                     VALUES(@nombreDireccion, @idPersona, @estadoModificacion)";
             try
             {
@@ -62,7 +62,7 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
             SqlCommand command = null;
 
             //Consulta para insertar telefonos
-            string queryString = @"INSERT INTO Direccion(nombreDireccion, idPersona,idInmueble, estadoModificacion)
+            string queryString = @"INSERT INTO DireccionPersona(nombreDireccion, idPersona,idInmueble, estadoModificacion)
                                             VALUES(@nombreDireccion, @idPersona, @estadoModificacion)";
 
             command = new SqlCommand(queryString);
@@ -85,7 +85,7 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
             SqlCommand command = null;
 
             // Proporcionar la cadena de consulta 
-            string queryString = @"UPDATE Direccion SET estadoModificacion=1
+            string queryString = @"UPDATE DireccionPersona SET estadoModificacion=1
                                     WHERE idInmueble = @idInmueble";
             try
             {
@@ -118,7 +118,7 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
             SqlCommand command = null;
 
             // Proporcionar la cadena de consulta 
-            string queryString = @"UPDATE Direccion SET nombreDireccion=@nombreDireccion
+            string queryString = @"UPDATE DireccionPersona SET nombreDireccion=@nombreDireccion
                                     WHERE idDireccion = @idDireccion";
             try
             {
@@ -153,7 +153,7 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
             DireccionPersona res = new DireccionPersona();
             SqlCommand cmd = null;
             SqlDataReader dr = null;
-            string query = @"SELECT * FROM Direccion WHERE idDireccion=@id and estadoModificacion=0";
+            string query = @"SELECT * FROM DireccionPersona WHERE idDireccion=@id and estadoModificacion=0";
             try
             {
                 cmd = OperacionesSql.CreateBasicCommand(query);

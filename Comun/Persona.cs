@@ -17,13 +17,17 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.Comun
         /// </summary>
         public string Nombres { get; set; }
         /// <summary>
-        /// Primer apellido de la perosna
+        /// Primer apellido de la persona
         /// </summary>
         public string PrimerApellido { get; set; }
         /// <summary>
         /// Segundo apellido de la persona
         /// </summary>
         public string SegundoApellido { get; set; }
+        /// <summary>
+        /// cargo de la persona
+        /// </summary>
+        public byte Cargo { get; set; }
         /// <summary>
         /// carnet de la persona
         /// </summary>
