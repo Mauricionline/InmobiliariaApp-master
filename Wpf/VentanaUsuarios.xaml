@@ -14,6 +14,13 @@
                 <DataGridTextColumn Binding="{Binding SegundoApellido}" Header="Segundo Apellido" Width="*"/>
                 <DataGridTextColumn Binding="{Binding Cargo}" Header="Cargo" Width="*"/>
                 <DataGridTextColumn Binding="{Binding Carnet}" Header="Carnet" Width="*"/>
+                <DataGridTemplateColumn Header="Eliminar" Width="55">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="btn_eliminar" Content="Eliminar" Click="btn_eliminar_usuario_Click" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
             
         </DataGrid>

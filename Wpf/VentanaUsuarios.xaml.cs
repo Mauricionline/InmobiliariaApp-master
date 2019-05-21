@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,6 +47,14 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.Wpf
 
             datagrid_Usuarios.ItemsSource = personas_encontradas;
             
+        }
+
+        private void btn_eliminar_usuario_Click(object sender, RoutedEventArgs e)
+        {
+            DataRowView dataRowView = (DataRowView)((Button)e.Source).DataContext;
+
+            string nombre_usuario = dataRowView[1].ToString();
+            MessageBox.Show("hiciste click en " + nombre_usuario);
         }
     }
 }
