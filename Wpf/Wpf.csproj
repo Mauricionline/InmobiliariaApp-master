@@ -59,6 +59,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="VentanaModificarUsuario.xaml.cs">
+      <DependentUpon>VentanaModificarUsuario.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaNuevoUsuario.xaml.cs">
+      <DependentUpon>VentanaNuevoUsuario.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VentanaUsuarios.xaml.cs">
       <DependentUpon>VentanaUsuarios.xaml</DependentUpon>
     </Compile>
@@ -117,6 +123,14 @@
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="VentanaModificarUsuario.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaNuevoUsuario.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="VentanaUsuarios.xaml">
       <SubType>Designer</SubType>

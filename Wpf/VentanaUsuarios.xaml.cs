@@ -34,27 +34,41 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.Wpf
             this.Close();
         }
 
-        public List<Persona> obtener_empleados_primer_apellido(string primer_apellido)
+        public void obtener_empleados_primer_apellido(string primer_apellido)
         {
             List<Persona> personas_encontradas = PersonasBrl.buscar_persona_por_primer_apellido(primer_apellido);
-            return personas_encontradas;
+            datagrid_Usuarios.ItemsSource = personas_encontradas;
         }
 
         private void Btn_buscar_usuario_Click(object sender, RoutedEventArgs e)
         {
             string primer_apellido = txt_primer_apellido.Text;
-            List<Persona> personas_encontradas = obtener_empleados_primer_apellido(primer_apellido);
-
-            datagrid_Usuarios.ItemsSource = personas_encontradas;
-            
+            obtener_empleados_primer_apellido(primer_apellido);                        
         }
 
         private void btn_eliminar_usuario_Click(object sender, RoutedEventArgs e)
         {
-            DataRowView dataRowView = (DataRowView)((Button)e.Source).DataContext;
+            Persona persona_boton = (Persona)((Button)e.Source).DataContext;
+            string nombre_usuario = persona_boton.Nombres.ToString();
+            PersonasBrl.Eliminar(persona_boton.IdPersona);
+            MessageBox.Show(string.Format("Eliminaste a {0}",nombre_usuario));
+            string primer_apellido = txt_primer_apellido.Text;
+            obtener_empleados_primer_apellido(primer_apellido);
+        }
 
-            string nombre_usuario = dataRowView[1].ToString();
-            MessageBox.Show("hiciste click en " + nombre_usuario);
+        private void btn_modificar_usuario_Click(object sender, RoutedEventArgs e)
+        {
+            Persona persona_boton = (Persona)((Button)e.Source).DataContext;
+            VentanaModificarUsuario ventanaModificarUsuario = new VentanaModificarUsuario(persona_boton);
+            ventanaModificarUsuario.Show();
+            this.Close();
+        }
+
+        private void Btn_nuevo_usuario_Click(object sender, RoutedEventArgs e)
+        {
+            VentanaNuevoUsuario ventanaNuevoUsuario = new VentanaNuevoUsuario();
+            ventanaNuevoUsuario.Show();
+            this.Close();
         }
     }
 }
