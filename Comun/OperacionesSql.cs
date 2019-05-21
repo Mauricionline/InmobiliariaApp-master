@@ -14,7 +14,6 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.Comun
         //Cadena de conexion a la base de datos recuperad del archivo de configuración
         public static string _connectionString = ConfigurationManager.ConnectionStrings["InmobiliariaAppConnectionString"].ConnectionString;
 
-
         /// <summary>
         /// Retorna un comando sql relacionado a la conexion
         /// </summary>

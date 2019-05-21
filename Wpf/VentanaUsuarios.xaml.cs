@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.Comun;
+using Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.PersonaBrl;
 
 namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.Wpf
 {
@@ -31,14 +33,19 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.Wpf
             this.Close();
         }
 
-        public void obtener_empleados()
+        public List<Persona> obtener_empleados_primer_apellido(string primer_apellido)
         {
-
+            List<Persona> personas_encontradas = PersonasBrl.buscar_persona_por_primer_apellido(primer_apellido);
+            return personas_encontradas;
         }
 
         private void Btn_buscar_usuario_Click(object sender, RoutedEventArgs e)
         {
+            string primer_apellido = txt_primer_apellido.Text;
+            List<Persona> personas_encontradas = obtener_empleados_primer_apellido(primer_apellido);
 
+            datagrid_Usuarios.ItemsSource = personas_encontradas;
+            
         }
     }
 }

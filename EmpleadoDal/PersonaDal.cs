@@ -196,16 +196,17 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
             return res;
         }
 
-        public void buscar_persona()
+        public static List<Persona> buscar_persona_por_primer_apellido(string primer_apellido)
         {
+            List<Persona> personas_encontradas = new List<Persona>();
             Persona res = new Persona();
             SqlCommand cmd = null;
             SqlDataReader dr = null;
-            string query = @"SELECT * FROM Persona WHERE idPersona=@id and estadoModificacion=0";
+            string query = @"SELECT * FROM Persona WHERE primerApellido=@primer_apellido and estadoModificacion=0";
             try
             {
                 cmd = OperacionesSql.CreateBasicCommand(query);
-                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@primer_apellido", primer_apellido);
                 dr = OperacionesSql.ExecuteDataReaderCommand(cmd);
                 while (dr.Read())
                 {
@@ -218,18 +219,20 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
                         Cargo = dr.GetByte(4),
                         Carnet = dr.GetString(5),
                     };
+
+                    personas_encontradas.Add(res);
                 }
             }
             catch (Exception ex)
             {
-                Operaciones.WriteLogsRelease(NOMBREDAL, "Obtenet(Get)", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                Operaciones.WriteLogsRelease(NOMBREDAL, "buscar personas por primer apellido(Get)", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
             finally
             {
                 cmd.Connection.Close();
             }
-            return res;
+            return personas_encontradas;
         }
     }
 }

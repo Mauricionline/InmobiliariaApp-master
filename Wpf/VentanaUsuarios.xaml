@@ -7,7 +7,16 @@
         mc:Ignorable="d"
         Title="VentanaUsuarios" Height="450" Width="800">
     <Grid>
-        <DataGrid Name="datagrid_Usuarios" HorizontalAlignment="Left" Height="340" Margin="208,28,0,0" VerticalAlignment="Top" Width="557"/>
+        <DataGrid AutoGenerateColumns="False" Name="datagrid_Usuarios" HorizontalAlignment="Left" Height="340" Margin="208,28,0,0" VerticalAlignment="Top" Width="557">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Nombres}" Header="Nombres" Width="*"/>
+                <DataGridTextColumn Binding="{Binding PrimerApellido}" Header="Primer Apellido" Width="*"/>
+                <DataGridTextColumn Binding="{Binding SegundoApellido}" Header="Segundo Apellido" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Cargo}" Header="Cargo" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Carnet}" Header="Carnet" Width="*"/>
+            </DataGrid.Columns>
+            
+        </DataGrid>
         <Button Content="Atras" HorizontalAlignment="Left" Margin="24,28,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
         <TextBox x:Name="txt_primer_apellido" HorizontalAlignment="Left" Height="23" Margin="24,99,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="btn_buscar_usuario" Content="Buscar" HorizontalAlignment="Left" Margin="24,307,0,0" VerticalAlignment="Top" Width="75" Click="Btn_buscar_usuario_Click"/>

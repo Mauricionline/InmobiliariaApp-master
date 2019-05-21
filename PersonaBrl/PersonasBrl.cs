@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.Comun;
 
 namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.PersonaBrl
 {
-    public class PersonaBrl
+    public class PersonasBrl
     {
         const string NOMBRE = "Persona";
         const string NOMBREBRL = "PersonaBrl";
@@ -133,5 +134,30 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.PersonaBrl
                 throw ex;
             }
         }
+
+        public static List<Persona> buscar_persona_por_primer_apellido(string primer_apellido)
+        {
+            Operaciones.WriteLogsDebug(NOMBREBRL, "buscar personas por primer apellido", string.Format("{0} Info: {1}",
+            DateTime.Now.ToLongDateString(),
+            "Empezando a ejecutar el metodo logica de negocio para buscar personas por primer apellido " + NOMBRE));
+
+            try
+            {
+                return EmpleadoDal.PersonaDal.buscar_persona_por_primer_apellido(primer_apellido);
+            }
+            catch (SqlException ex)
+            {
+                Operaciones.WriteLogsRelease(NOMBREBRL, "buscar personas por primer apellido", string.Format("{0} {1} Error: {2}",
+                    DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                Operaciones.WriteLogsRelease(NOMBREBRL, "buscar personas por primer apellido", string.Format("{0} {1} Error: {2}",
+                    DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                throw ex;
+            }
+        }
+
     }
 }
