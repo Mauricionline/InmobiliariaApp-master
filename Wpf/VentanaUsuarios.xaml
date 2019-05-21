@@ -7,8 +7,15 @@
         mc:Ignorable="d"
         Title="VentanaUsuarios" Height="450" Width="800">
     <Grid>
-        <DataGrid HorizontalAlignment="Left" Height="340" Margin="208,28,0,0" VerticalAlignment="Top" Width="557"/>
+        <DataGrid Name="datagrid_Usuarios" HorizontalAlignment="Left" Height="340" Margin="208,28,0,0" VerticalAlignment="Top" Width="557"/>
         <Button Content="Atras" HorizontalAlignment="Left" Margin="24,28,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <TextBox x:Name="txt_primer_apellido" HorizontalAlignment="Left" Height="23" Margin="24,99,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btn_buscar_usuario" Content="Buscar" HorizontalAlignment="Left" Margin="24,307,0,0" VerticalAlignment="Top" Width="75" Click="Btn_buscar_usuario_Click"/>
+        <ComboBox HorizontalAlignment="Left" Margin="24,218,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Seleccione un Rol:" HorizontalAlignment="Left" Margin="24,188,0,0" VerticalAlignment="Top"/>
+        <Label Content="Primer Apellido:" HorizontalAlignment="Left" Margin="24,68,0,0" VerticalAlignment="Top"/>
+        <Label Content="Segundo Apellido:" HorizontalAlignment="Left" Margin="22,127,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt_segundo_apellido" HorizontalAlignment="Left" Height="23" Margin="24,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>

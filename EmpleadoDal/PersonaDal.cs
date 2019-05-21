@@ -195,5 +195,41 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
             }
             return res;
         }
+
+        public void buscar_persona()
+        {
+            Persona res = new Persona();
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+            string query = @"SELECT * FROM Persona WHERE idPersona=@id and estadoModificacion=0";
+            try
+            {
+                cmd = OperacionesSql.CreateBasicCommand(query);
+                cmd.Parameters.AddWithValue("@id", id);
+                dr = OperacionesSql.ExecuteDataReaderCommand(cmd);
+                while (dr.Read())
+                {
+                    res = new Persona()
+                    {
+                        IdPersona = dr.GetInt32(0),
+                        Nombres = dr.GetString(1),
+                        PrimerApellido = dr.GetString(2),
+                        SegundoApellido = dr.GetString(3),
+                        Cargo = dr.GetByte(4),
+                        Carnet = dr.GetString(5),
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                Operaciones.WriteLogsRelease(NOMBREDAL, "Obtenet(Get)", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                throw ex;
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+            return res;
+        }
     }
 }

@@ -30,5 +30,15 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.Wpf
             inicio.Show();
             this.Close();
         }
+
+        public void obtener_empleados()
+        {
+
+        }
+
+        private void Btn_buscar_usuario_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
