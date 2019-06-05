@@ -40,6 +40,10 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.Comun
         /// Fecha de modificacion de algun dato de la persona
         /// </summary>
         public DateTime FechaModificacion { get; set; }
+        ///<sumary>
+        /// sexo de la persona
+        ///</sumary>
+        public byte Sexo  { get; set; }
         #endregion
     }
 }

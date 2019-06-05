@@ -24,9 +24,22 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.Comun
             SqlCommand cmd = new SqlCommand();                              
             cmd.Connection = connection;                                        
             return cmd;                                                     
-        }                                                                   
-                                                                            
-                                                                            
+        }
+
+        /// <summary>
+        /// Retorna un comando sql relacionado a la conexion
+        /// </summary>
+        /// <param name="query">consulta para ejecutar el comando</param>
+        /// <returns></returns>
+        public static SqlCommand CreateBasicCommandWithTransaction(string query, SqlTransaction transaccion, SqlConnection conexion)
+        {
+            SqlConnection connection = conexion;
+            SqlCommand cmd = new SqlCommand(query);
+            cmd.Connection = connection;
+            cmd.Transaction = transaccion;
+            return cmd;
+        }
+
         /// <summary>                                                       
         /// Retorna el objeto de la conexion a la base de datos             
         /// </summary>                                                      
@@ -397,6 +410,29 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.Comun
                 res.Add(cmd);
             }
             return res;
+        }
+
+        /// <summary>
+        /// recibe un sql command y lo ejecuta con ExecuteNonQuery();  
+        /// </summary>
+        /// <param name="cmd"> comando relacionado con una conexion</param>
+        public static void ExecuteBasicCommandWithTransaction(SqlCommand cmd)
+        {
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                WriteLogsRelease("Methods", "SqlException in ExecuteBasicCommand", string.Format("{0} {1}", ex.Message, ex.StackTrace));
+                throw new Exception("Se ha producido un error en el método ExecuteBasicCommand(SqlCommand cmd)", ex);
+            }
+            catch (Exception ex)
+            {
+                WriteLogsRelease("Methods", "Exception in ExecuteBasicCommand", string.Format("{0} {1}", ex.Message, ex.StackTrace));
+                throw new Exception("Se ha producido un error en el método ExecuteBasicCommand(SqlCommand cmd)", ex);
+            }
+
         }
 
     }

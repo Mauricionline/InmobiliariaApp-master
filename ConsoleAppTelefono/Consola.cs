@@ -7,26 +7,26 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.ConsoleAppTelefono
     {
         //static void Main(string[] args)
         //{
-        //    //Telefono telefono = new Telefono()
-        //    //{
-        //    //    NumeroTelefono = 4444444,
-        //    //    TipodeTelefono = 1,
-        //    //    IdPersona = new Persona()
-        //    //    {
-        //    //        IdPersona = 2,
-        //    //    },
-        //    //    EstadoModificacion = 1,
-        //    //};
+        //    Telefono telefono = new Telefono()
+        //    {
+        //        NumeroTelefono = 4444444,
+        //        TipodeTelefono = 1,
+        //        IdPersona = new Persona()
+        //        {
+        //            IdPersona = 2,
+        //        },
+        //        EstadoModificacion = 1,
+        //    };
 
-        //    //PersonaBrl.TelefonoBrl.Insertar(telefono);
+        //    PersonaBrl.TelefonoBrl.Insertar(telefono);
 
-        //    //Telefono telefono_actualizado = new Telefono
-        //    //{
-        //    //    IdTelefono = 27,
-        //    //    NumeroTelefono = 8888888,
-        //    //};
-        //    //PersonaBrl.TelefonoBrl.Actualizar(telefono_actualizado);
-        //    //PersonaBrl.TelefonoBrl.Eliminar(27);
+        //    Telefono telefono_actualizado = new Telefono
+        //    {
+        //        IdTelefono = 27,
+        //        NumeroTelefono = 8888888,
+        //    };
+        //    PersonaBrl.TelefonoBrl.Actualizar(telefono_actualizado);
+        //    PersonaBrl.TelefonoBrl.Eliminar(27);
         //}
         //static void Main(string[] args)
         //{
@@ -79,6 +79,49 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.ConsoleAppTelefono
             //Console.WriteLine(persona_devolver.SegundoApellido);
             //Console.ReadKey();
         }*/
+
+
+        static void Main(string[] args)
+        {
+            //DateTime date = new DateTime(2000, 05, 20);
+            //Empleado empleado = new Empleado()
+            //{
+            //    Nombres = "Ariel",
+            //    PrimerApellido = "Alanez",
+            //    SegundoApellido = "Sejas",
+            //    Carnet = "654798",
+            //    Sexo = 0,
+            //    Cargo = 1,
+            //    Sueldo = 3000,
+            //    FechaContratacion = date
+            //};
+
+            //PersonaBrl.EmpleadosBrl.Insertar(empleado);
+            Empleado empleado_devuelto = PersonaBrl.EmpleadosBrl.Obtener(33);
+
+            Console.WriteLine(empleado_devuelto.Nombres);
+            Console.WriteLine(empleado_devuelto.PrimerApellido);
+            Console.WriteLine(empleado_devuelto.SegundoApellido);
+            Console.WriteLine(empleado_devuelto.Cargo);
+            Console.WriteLine(empleado_devuelto.Sueldo);
+            Console.ReadKey();
+
+
+            //PersonaBrl.PersonaBrl.Insertar(persona);
+            //PersonaBrl.PersonaBrl.Eliminar(5);
+            //      Persona persona_devolver = PersonaBrl.PersonaBrl.Obtener(4);
+            //persona_devolver.Nombres = "Alejandro";
+            //persona_devolver.PrimerApellido = "Fernandez";
+            //persona_devolver.SegundoApellido = "Galindo";
+            //PersonaBrl.PersonaBrl.Actualizar(persona_devolver);
+
+
+            //Console.WriteLine(persona_devolver.Nombres);
+            //Console.WriteLine(persona_devolver.PrimerApellido);
+            //Console.WriteLine(persona_devolver.SegundoApellido);            
+        }
+
+
         //static void Main(string[] args)
         //{
         //    Cuenta cuenta = new Cuenta()
@@ -110,20 +153,20 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.ConsoleAppTelefono
         //    PersonaBrl.DireccionPersonaBrl.Insertar(direccion);*/
         //}
 
-        static void Main(string[] args)
-        {
-            //DireccionPersona direccion_persona = new DireccionPersona()
-            //{
-            //    NombreDireccion = "Av. Aroma",
-            //    IdDireccion = 8,
-            //    IdPersona = new Persona()
-            //    {
-            //        IdPersona = 2,
-            //    },
+        //static void Main(string[] args)
+        //{
+        //    //DireccionPersona direccion_persona = new DireccionPersona()
+        //    //{
+        //    //    NombreDireccion = "Av. Aroma",
+        //    //    IdDireccion = 8,
+        //    //    IdPersona = new Persona()
+        //    //    {
+        //    //        IdPersona = 2,
+        //    //    },
 
-            //};
+        //    //};
 
-            //PersonaBrl.DireccionPersonaBrl.Insertar(direccion_persona);
-        }
+        //    //PersonaBrl.DireccionPersonaBrl.Insertar(direccion_persona);
+        //}
     }
 }

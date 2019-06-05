@@ -70,5 +70,10 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.Wpf
             ventanaNuevoUsuario.Show();
             this.Close();
         }
+
+        private void Btn_nuevo_Empleado_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

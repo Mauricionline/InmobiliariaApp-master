@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="VentanaUsuarios" Height="450" Width="900">
     <Grid>
-        <DataGrid AutoGenerateColumns="False" Name="datagrid_Usuarios" HorizontalAlignment="Left" Height="340" Margin="197,28,0,0" VerticalAlignment="Top" Width="588">
+        <DataGrid AutoGenerateColumns="False" Name="datagrid_Usuarios" HorizontalAlignment="Left" Height="340" Margin="187,25,0,0" VerticalAlignment="Top" Width="588">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Nombres}" Header="Nombres" Width="*"/>
                 <DataGridTextColumn Binding="{Binding PrimerApellido}" Header="Primer Apellido" Width="100"/>
@@ -40,7 +40,8 @@
         <Label Content="Primer Apellido:" HorizontalAlignment="Left" Margin="24,68,0,0" VerticalAlignment="Top"/>
         <Label Content="Segundo Apellido:" HorizontalAlignment="Left" Margin="22,127,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txt_segundo_apellido" HorizontalAlignment="Left" Height="23" Margin="24,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button Name="btn_nuevo_usuario" Content="Nuevo Usuario" HorizontalAlignment="Left" Margin="799,30,0,0" VerticalAlignment="Top" Width="85" Height="66" Click="Btn_nuevo_usuario_Click"/>
+        <Button Name="btn_nuevo_usuario" Content="Nuevo Cliente" HorizontalAlignment="Left" Margin="780,30,0,0" VerticalAlignment="Top" Width="104" Height="66" Click="Btn_nuevo_usuario_Click"/>
+        <Button x:Name="btn_nuevo_Empleado" Content="Nuevo Empleado" HorizontalAlignment="Left" Margin="780,107,0,0" VerticalAlignment="Top" Width="104" Height="57" Click="Btn_nuevo_Empleado_Click"/>
 
     </Grid>
 </Window>
