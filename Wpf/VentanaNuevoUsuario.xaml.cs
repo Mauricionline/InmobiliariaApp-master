@@ -36,6 +36,11 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.Wpf
             persona.Cargo = byte.Parse(txt_cargo.Text); //modificar por combobox
             persona.Carnet = txt_carnet.Text;
 
+            //if(txt_telefono.Text != "")
+            //{
+
+            //}
+
             PersonasBrl.Insertar(persona);
             MessageBox.Show("Usuario Registrado correctamente");
 

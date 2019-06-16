@@ -65,6 +65,9 @@
     <Compile Include="VentanaNuevoEmpleado.xaml.cs">
       <DependentUpon>VentanaNuevoEmpleado.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VentanaNuevoInmueble.xaml.cs">
+      <DependentUpon>VentanaNuevoInmueble.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VentanaNuevoUsuario.xaml.cs">
       <DependentUpon>VentanaNuevoUsuario.xaml</DependentUpon>
     </Compile>
@@ -113,6 +116,14 @@
       <Project>{9b4b97b2-6a91-49f9-b132-820f90dd8028}</Project>
       <Name>EmpleadoDal</Name>
     </ProjectReference>
+    <ProjectReference Include="..\InmobiliariaBrl\InmobiliariaBrl.csproj">
+      <Project>{3c903e9a-49a7-496e-ab02-349d03831f9a}</Project>
+      <Name>InmobiliariaBrl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InmobiliariaDal\InmobiliariaDal.csproj">
+      <Project>{76b255ff-a8bc-4425-8023-f1c39f321306}</Project>
+      <Name>InmobiliariaDal</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PersonaBrl\PersonaBrl.csproj">
       <Project>{d1979cde-fbb6-4497-a4ac-ef062adff11c}</Project>
       <Name>PersonaBrl</Name>
@@ -132,6 +143,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="VentanaNuevoEmpleado.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaNuevoInmueble.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

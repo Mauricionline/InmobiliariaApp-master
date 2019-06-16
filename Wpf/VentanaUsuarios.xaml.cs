@@ -64,6 +64,14 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.Wpf
             this.Close();
         }
 
+        private void btn_detalle_usuario_Click(object sender, RoutedEventArgs e)
+        {
+            Persona persona_boton = (Persona)((Button)e.Source).DataContext;
+
+            
+            this.Close();
+        }
+
         private void Btn_nuevo_usuario_Click(object sender, RoutedEventArgs e)
         {
             VentanaNuevoUsuario ventanaNuevoUsuario = new VentanaNuevoUsuario();
@@ -73,7 +81,9 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.Wpf
 
         private void Btn_nuevo_Empleado_Click(object sender, RoutedEventArgs e)
         {
-
+            VentanaNuevoEmpleado ventanaNuevoEmpleado = new VentanaNuevoEmpleado();
+            ventanaNuevoEmpleado.Show();
+            this.Close();
         }
     }
 }

@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.Comun;
+using Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.PersonaBrl;
 
 namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.Wpf
 {
@@ -26,7 +28,20 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.Wpf
 
         private void Btn_crear_usuario_Click(object sender, RoutedEventArgs e)
         {
+            Empleado empleado = new Empleado();
 
+            empleado.Nombres = txt_nombres.Text;
+            empleado.PrimerApellido = txt_primer_apellido.Text;
+            empleado.SegundoApellido = txt_segundo_apellido.Text;
+            empleado.Cargo = byte.Parse(txt_cargo.Text); //modificar por combobox
+            empleado.Carnet = txt_carnet.Text;
+
+            EmpleadosBrl.Insertar(empleado);
+            MessageBox.Show("Empleado Registrado correctamente");
+
+            VentanaUsuarios ventanaUsuarios = new VentanaUsuarios();
+            ventanaUsuarios.Show();
+            this.Close();
         }
     }
 }

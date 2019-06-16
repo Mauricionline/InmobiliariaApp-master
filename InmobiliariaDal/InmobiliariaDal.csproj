@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{23BB8944-4993-4825-A5D4-B276696C3283}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.ConsoleAppTelefono</RootNamespace>
-    <AssemblyName>Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.ConsoleAppTelefono</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <ProjectGuid>{76B255FF-A8BC-4425-8023-F1C39F321306}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>InmobiliariaDal</RootNamespace>
+    <AssemblyName>InmobiliariaDal</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,16 +23,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -46,24 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Consola.cs" />
+    <Compile Include="DireccionInmuebleDal.cs" />
+    <Compile Include="InmuebleDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Comun\Comun.csproj">
       <Project>{5cd40e75-8749-4c5d-862b-24b5e6ec7a3e}</Project>
       <Name>Comun</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EmpleadoDal\EmpleadoDal.csproj">
-      <Project>{9b4b97b2-6a91-49f9-b132-820f90dd8028}</Project>
-      <Name>EmpleadoDal</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PersonaBrl\PersonaBrl.csproj">
-      <Project>{d1979cde-fbb6-4497-a4ac-ef062adff11c}</Project>
-      <Name>PersonaBrl</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

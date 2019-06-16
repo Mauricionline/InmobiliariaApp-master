@@ -21,8 +21,8 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
             SqlCommand command = null;
 
             //Consulta para insertar Empleado
-            string queryString = @"INSERT INTO Empleado(idEmpleado, fechaContratacion, sueldo) 
-                                    VALUES(@idEmpleado, @fechaContratacion, @sueldo)";
+            string queryString = @"INSERT INTO Empleado(idEmpleado, sueldo) 
+                                    VALUES(@idEmpleado, @sueldo)";
 
             SqlConnection connection = OperacionesSql.ObtenerConexion();
             SqlTransaction transaction = null;
@@ -35,7 +35,7 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
 
                 command = OperacionesSql.CreateBasicCommandWithTransaction(queryString, transaction, connection);
                 command.Parameters.AddWithValue("@idEmpleado", OperacionesSql.GetActIdTable("Persona"));
-                command.Parameters.AddWithValue("@fechaContratacion", empleado.FechaContratacion);
+                
                 command.Parameters.AddWithValue("@sueldo", empleado.Sueldo);
                 OperacionesSql.ExecuteBasicCommandWithTransaction(command);
 
