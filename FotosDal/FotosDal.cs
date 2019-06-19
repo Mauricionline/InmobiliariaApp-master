@@ -1,24 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.Comun;
-
-namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.InmobiliariaDal
+namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.FotosDal
 {
-    public class InmuebleDal
+    public class FotosDal
     {
-
-        const string NOMBRE = "Inmueble";
-        const string NOMBREDAL = "InmuebleDal";
+        const string NOMBRE = "Fotos";
+        const string NOMBREDAL = "FotosDal";
         /// <summary>
         /// Inserta un telefono a la base de datos 
         /// </summary>       
-        /// <param name="IdInmueble"></param>
+        /// <param name="idFoto"></param>
 
-        public static void Insertar(Inmueble inmueble)
+        public static void Insertar(Fotos foto)
         {
             Operaciones.WriteLogsDebug(NOMBREDAL, "Insertar", string.Format("{0} Info: {1}",
             DateTime.Now.ToString(), "Empezando a ejecutar el metodo acceso a datos para crear una " + NOMBRE));
@@ -26,14 +20,14 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.InmobiliariaDal
             SqlCommand command = null;
 
             //Consulta para insertar inmuebles
-            string queryString = @"INSERT INTO Inmueble(estado, zona, superficieSprox, estadoModificacion) 
+            string queryString = @"INSERT INTO Fotos(estado, direccionFotos, estadoModificacion) 
                                     VALUES(@estado, @zona,@superficieSprox, @estadoModificacion)";
             try
             {
                 command = OperacionesSql.CreateBasicCommand(queryString);
-                command.Parameters.AddWithValue("@estado", inmueble.estado);
-                command.Parameters.AddWithValue("@zona", inmueble.zona);
-                command.Parameters.AddWithValue("@superficieSprox", inmueble.superficieSprox);
+                command.Parameters.AddWithValue("@estado", foto.estado);
+                command.Parameters.AddWithValue("@zona", foto.zona);
+                command.Parameters.AddWithValue("@superficieSprox", foto.superficieSprox);
                 command.Parameters.AddWithValue("@estadoModificacion", 0);
                 OperacionesSql.ExecuteBasicCommand(command);
             }
@@ -52,74 +46,6 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.InmobiliariaDal
                 DateTime.Now.ToString(), DateTime.Now.ToString(),
                 "Termino de ejecutar  el metodo acceso a datos para insertar " + NOMBRE));
         }
-
-        /// <summary>
-        /// Inserta un usaurio a la base de datos con transaccion
-        /// </summary>
-        /// <param name="Inmueble">Objeto usuario </param>
-        /// <param name="transaccion">Objeto transaccion</param>
-        /// <param name="conexion">Objeto conexion</param>
-        public static void InsertarTransaccion(Inmueble inmueble, SqlTransaction transaccion, SqlConnection conexion)
-        {
-            Operaciones.WriteLogsDebug("InmuebleDal", "InsertarTransaccion", string.Format("{0} Info: {1}",
-            DateTime.Now.ToString(), "Empezando a ejecutar el metodo acceso a datos para crear un usuario"));
-
-            SqlCommand command = null;
-
-            //Consulta para insertar Inmuebles
-            string queryString = @"INSERT INTO Inmueble(estado, zona, superficieSprox, estadoModificacion) 
-                                    VALUES(@estado, @zona,@superficieSprox, @estadoModificacion)";
-            try
-            {
-                command = OperacionesSql.CreateBasicCommandWithTransaction(queryString, transaccion, conexion);
-                command.Parameters.AddWithValue("@estado", inmueble.estado);
-                command.Parameters.AddWithValue("@zona", inmueble.zona);
-                command.Parameters.AddWithValue("@superficieSprox", inmueble.superficieSprox);
-                command.Parameters.AddWithValue("@estadoModificacion", 0);
-                OperacionesSql.ExecuteBasicCommandWithTransaction(command);
-
-
-            }
-            catch (SqlException ex)
-            {
-                Operaciones.WriteLogsRelease("InmuebleDal", "InsertarTransaccion", string.Format("{0} {1} Error: {1}", DateTime.Now.ToString(), DateTime.Now.ToString(), ex.Message));
-                throw ex;
-            }
-            catch (Exception ex)
-            {
-                Operaciones.WriteLogsRelease("InmuebleDal", "InsertarTransaccion", string.Format("{0} {1} Error: {1}", DateTime.Now.ToString(), DateTime.Now.ToString(), ex.Message));
-                throw ex;
-            }
-
-            Operaciones.WriteLogsDebug("InmuebleDal", "InsertarTransaccion", string.Format("{0} {1} Info: {1}",
-                DateTime.Now.ToString(), DateTime.Now.ToString(),
-                "Termino de ejecutar  el metodo acceso a datos para insertar usuario"));
-        }
-
-        /// <summary>
-        /// Inserta un Email a la base de datos y devuelve el ID, aparte me devuelve el comando
-        /// </summary>
-        /// <param name=Persona></param>        
-        public static SqlCommand InsertarOUTPUT(Persona persona)
-        {
-            Operaciones.WriteLogsDebug(NOMBREDAL, "Insertar", string.Format("{0} Info: {1}",
-            DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para crear un " + NOMBRE));
-
-            SqlCommand command = null;
-
-            //Consulta para insertar Persona
-            string queryString = @"INSERT INTO Inmueble(nombres, primerApellido, segundoApellido, cargo, carnet, estadoModificacion, sexo) 
-                                            VALUES(@nombres, @primerApellido,@segundoApellido, @cargo, @carnet, @estadoModificacion, @sexo)";
-
-            command = new SqlCommand(queryString);
-            command.Parameters.AddWithValue("@estado", inmueble.estado);
-            command.Parameters.AddWithValue("@zona", inmueble.zona);
-            command.Parameters.AddWithValue("@superficieSprox", inmueble.superficieSprox);
-            command.Parameters.AddWithValue("@estadoModificacion", 0);
-            return command;
-
-        }
-
         /// <summary>
         /// Elimina Persona de la base de datos
         /// </summary>
@@ -152,40 +78,6 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.InmobiliariaDal
 
             Operaciones.WriteLogsDebug(NOMBREDAL, "Eliminar", string.Format("{0} {1} Info: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Termino de ejecutar  el metodo acceso a datos para Eliminar un " + NOMBRE));
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="IdInmueble"></param>
-        public static void EliminarPorIdInmuebleConTransaccion(int IdInmueble, SqlTransaction transaccion, SqlConnection conexion)
-        {
-            Operaciones.WriteLogsDebug(NOMBREDAL, "EliminarPorIdInmueble", string.Format("{0} Info: {1}", DateTime.Now.ToString(), "Empezando a ejecutar el metodo acceso a datos para eliminar un Usuario"));
-
-            SqlCommand command = null;
-
-            // Proporcionar la cadena de consulta 
-            string queryString = @"UPDATE Inmueble SET estadoModificacion=1
-                                    WHERE IdInmueble = (Select IdInmueble FROM IdInmueble WHERE IdInmueble = @IdInmueble)";
-            try
-            {
-                command = OperacionesSql.CreateBasicCommandWithTransaction(queryString, transaccion, conexion);
-                command.Parameters.AddWithValue("@IdInmueble", IdInmueble);
-                OperacionesSql.ExecuteBasicCommandWithTransaction(command);
-            }
-            catch (SqlException ex)
-            {
-                Operaciones.WriteLogsRelease(NOMBREDAL, "EliminarPorIdInmueble", string.Format("{0} {1} Error: {1}", DateTime.Now.ToString(), DateTime.Now.ToString(), ex.Message));
-                throw ex;
-            }
-            catch (Exception ex)
-            {
-                Operaciones.WriteLogsRelease(NOMBREDAL, "EliminarPorIdInmueble", string.Format("{0} {1} Error: {1}", DateTime.Now.ToString(), DateTime.Now.ToString(), ex.Message));
-                throw ex;
-            }
-
-            Operaciones.WriteLogsDebug(NOMBREDAL, "EliminarPorIdInmueble", string.Format("{0} {1} Info: {1}", DateTime.Now.ToString(), DateTime.Now.ToString(), "Termino de ejecutar  el metodo acceso a datos para Eliminar un Cliente"));
-        }
-
 
         /// <summary>
         /// Actualiza Persona de la base de datos
@@ -297,9 +189,8 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.InmobiliariaDal
             {
                 cmd.Connection.Close();
             }
-            
+
         }
     }
 }
-
 

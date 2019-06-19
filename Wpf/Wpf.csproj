@@ -112,10 +112,6 @@
       <Project>{5cd40e75-8749-4c5d-862b-24b5e6ec7a3e}</Project>
       <Name>Comun</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EmpleadoDal\EmpleadoDal.csproj">
-      <Project>{9b4b97b2-6a91-49f9-b132-820f90dd8028}</Project>
-      <Name>EmpleadoDal</Name>
-    </ProjectReference>
     <ProjectReference Include="..\InmobiliariaBrl\InmobiliariaBrl.csproj">
       <Project>{3c903e9a-49a7-496e-ab02-349d03831f9a}</Project>
       <Name>InmobiliariaBrl</Name>
