@@ -432,7 +432,6 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.Comun
                 WriteLogsRelease("Methods", "Exception in ExecuteBasicCommand", string.Format("{0} {1}", ex.Message, ex.StackTrace));
                 throw new Exception("Se ha producido un error en el método ExecuteBasicCommand(SqlCommand cmd)", ex);
             }
-
         }
 
     }

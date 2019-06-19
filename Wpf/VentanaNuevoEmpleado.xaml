@@ -5,27 +5,45 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.Wpf"
         mc:Ignorable="d"
-        Title="VentanaNuevoEmpleado" Height="450" Width="400">
+        Title="VentanaNuevoEmpleado" Height="650" Width="400">
     <Grid>
-        <TextBox x:Name="txt_nombres" HorizontalAlignment="Left" Height="23" Margin="182,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txt_primer_apellido" HorizontalAlignment="Left" Height="23" Margin="182,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txt_segundo_apellido" HorizontalAlignment="Left" Height="23" Margin="182,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txt_cargo" HorizontalAlignment="Left" Height="23" Margin="182,144,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txt_carnet" HorizontalAlignment="Left" Height="23" Margin="182,172,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Nombres:" HorizontalAlignment="Left" Margin="68,56,0,0" VerticalAlignment="Top"/>
-        <Label Content="Primer Apellido:" HorizontalAlignment="Left" Margin="68,84,0,0" VerticalAlignment="Top"/>
-        <Label Content="Segundo Apellido:" HorizontalAlignment="Left" Margin="68,112,0,0" VerticalAlignment="Top"/>
-        <Label Content="Cargo:" HorizontalAlignment="Left" Margin="68,140,0,0" VerticalAlignment="Top"/>
-        <Label Content="Carnet:" HorizontalAlignment="Left" Margin="68,168,0,0" VerticalAlignment="Top"/>
-        <Button Name="btn_crear_usuario" Content="Crear Empleado" HorizontalAlignment="Left" Margin="146,279,0,0" VerticalAlignment="Top" Width="75" Click="Btn_crear_usuario_Click"/>
-        <Label Content="Sueldo:" HorizontalAlignment="Left" Margin="68,199,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt_Sueldo" HorizontalAlignment="Left" Height="23" Margin="182,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <ComboBox x:Name="Combo_sexo" HorizontalAlignment="Left" Margin="182,231,0,0" VerticalAlignment="Top" Width="120">
+        <TextBox x:Name="txt_nombres" HorizontalAlignment="Left" Height="23" Margin="181,27,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txt_primer_apellido" HorizontalAlignment="Left" Height="23" Margin="181,55,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txt_segundo_apellido" HorizontalAlignment="Left" Height="23" Margin="181,83,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txt_carnet" HorizontalAlignment="Left" Height="23" Margin="181,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Nombres:" HorizontalAlignment="Left" Margin="67,23,0,0" VerticalAlignment="Top"/>
+        <Label Content="Primer Apellido:" HorizontalAlignment="Left" Margin="67,51,0,0" VerticalAlignment="Top"/>
+        <Label Content="Segundo Apellido:" HorizontalAlignment="Left" Margin="67,79,0,0" VerticalAlignment="Top"/>
+        <Label Content="Carnet:" HorizontalAlignment="Left" Margin="67,113,0,0" VerticalAlignment="Top"/>
+        <Button Name="btn_crear_usuario" Content="Crear Usuario" HorizontalAlignment="Left" Margin="131,546,0,0" VerticalAlignment="Top" Width="134" Click="Btn_crear_usuario_Click"/>
+        <ComboBox x:Name="Combo_sexo" HorizontalAlignment="Left" Margin="181,141,0,0" VerticalAlignment="Top" Width="120">
             <ComboBoxItem Content="Hombre"/>
             <ComboBoxItem Content="Mujer"/>
             <ComboBoxItem Content="Otro"/>
         </ComboBox>
-        <Label Content="Sexo" HorizontalAlignment="Left" Margin="68,230,0,0" VerticalAlignment="Top"/>
+        <Label Content="Sexo" HorizontalAlignment="Left" Margin="67,144,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt_email" HorizontalAlignment="Left" Height="23" Margin="181,236,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Email:" HorizontalAlignment="Left" Margin="67,236,0,0" VerticalAlignment="Top"/>
+        <Label Content="Telefono:" HorizontalAlignment="Left" Margin="67,297,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt_telefono" HorizontalAlignment="Left" Height="23" Margin="181,296,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="tipo telefono" HorizontalAlignment="Left" Margin="67,327,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="combo_tipo_telefono" HorizontalAlignment="Left" Margin="181,324,0,0" VerticalAlignment="Top" Width="120">
+            <ComboBoxItem Content="Fijo"/>
+            <ComboBoxItem Content="Celular"/>
+        </ComboBox>
+        <Label Content="*Datos del empleado" HorizontalAlignment="Left" Margin="29,5,0,0" VerticalAlignment="Top"/>
+        <Label Content="*Email" HorizontalAlignment="Left" Margin="29,207,0,0" VerticalAlignment="Top"/>
+        <Label Content="*Telefono" HorizontalAlignment="Left" Margin="29,267,0,0" VerticalAlignment="Top"/>
+        <Label Content="*Cuenta" HorizontalAlignment="Left" Margin="34,358,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt_usuario" HorizontalAlignment="Left" Height="23" Margin="181,383,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <PasswordBox x:Name="psw_password" HorizontalAlignment="Left" Margin="181,411,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Nombre de usuario:" HorizontalAlignment="Left" Margin="67,383,0,0" VerticalAlignment="Top"/>
+        <Label Content="Contraseña:" HorizontalAlignment="Left" Margin="67,411,0,0" VerticalAlignment="Top"/>
+        <Label Content="*Direccion" HorizontalAlignment="Left" Margin="34,442,0,0" VerticalAlignment="Top"/>
+        <Label Content="Direccion:" HorizontalAlignment="Left" Margin="70,472,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt_direccion" HorizontalAlignment="Left" Height="23" Margin="181,472,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Sueldo:" HorizontalAlignment="Left" Margin="72,175,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt_sueldo" HorizontalAlignment="Left" Height="23" Margin="181,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>

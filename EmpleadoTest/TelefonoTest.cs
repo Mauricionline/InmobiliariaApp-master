@@ -10,22 +10,7 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoTest
         [TestMethod]
         public void TestInsertar()
         {
-            //Arrange
-            Telefono telefono = new Telefono()
-            {
-                NumeroTelefono = 4444444,
-                TipodeTelefono = 1,
-                IdPersona = new Persona()
-                {
-                    IdPersona = 2,
-                },
-                EstadoModificacion = 1,
-            };
-            //Act
-            PersonaBrl.TelefonoBrl.Insertar(telefono);
-            //Assert
-
-            //Assert.
+           
         }
     }
 }

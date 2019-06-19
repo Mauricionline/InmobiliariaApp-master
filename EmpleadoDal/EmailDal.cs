@@ -178,5 +178,43 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
             }
             return res;
         }
+
+        public static void InsertarConTransaccion(Email email, SqlTransaction transaccion, SqlConnection conexion)
+        {
+            Operaciones.WriteLogsDebug("EmailDal", "Insertar", string.Format("{0} Info: {1}",
+            DateTime.Now.ToString(), "Empezando a ejecutar el metodo acceso a datos para crear un " + "cuenta"));
+
+            SqlCommand command = null;
+
+            //Consulta para insertar personas
+            string queryString = @"INSERT INTO Email(correoEmail, idPersona, estadoModificacion) 
+                                    VALUES(@correoEmail, @idPersona, @estadoModificacion)";
+
+            try
+            {
+                command = OperacionesSql.CreateBasicCommandWithTransaction(queryString, transaccion, conexion);
+
+                command.Parameters.AddWithValue("@correoEmail", email.CorreoEmail);
+                command.Parameters.AddWithValue("@idPersona", OperacionesSql.GetActIdTable("Persona"));
+                command.Parameters.AddWithValue("@estadoModificacion", 0);
+
+                OperacionesSql.ExecuteBasicCommandWithTransaction(command);
+
+            }
+            catch (SqlException ex)
+            {
+                Operaciones.WriteLogsRelease("EmailDal", "Insertar", string.Format("{0} Error: {1}", DateTime.Now.ToString(), DateTime.Now.ToString(), ex.Message));
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                Operaciones.WriteLogsRelease("EmailDal", "Insertar", string.Format("{0} Error: {1}", DateTime.Now.ToString(), DateTime.Now.ToString(), ex.Message));
+                throw ex;
+            }
+
+            Operaciones.WriteLogsDebug("EmailDal", "Insertar", string.Format("{0} Info: {1}",
+                DateTime.Now.ToString(), DateTime.Now.ToString(),
+                "Termino de ejecutar  el metodo acceso a datos para insertar " + "Email"));
+        }
     }
 }

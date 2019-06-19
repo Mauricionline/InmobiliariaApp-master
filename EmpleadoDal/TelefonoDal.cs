@@ -29,7 +29,7 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
                 command = OperacionesSql.CreateBasicCommand(queryString);
                 command.Parameters.AddWithValue("@numero", telefono.NumeroTelefono);
                 command.Parameters.AddWithValue("@tipo", telefono.TipodeTelefono);
-                command.Parameters.AddWithValue("@idPersona", telefono.IdPersona.IdPersona);
+                command.Parameters.AddWithValue("@idPersona", 1);
                 command.Parameters.AddWithValue("@estadoModificacion", 0);
                 OperacionesSql.ExecuteBasicCommand(command);
             }
@@ -67,7 +67,7 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
             command = new SqlCommand(queryString);
             command.Parameters.AddWithValue("@numero", telefono.NumeroTelefono);
             command.Parameters.AddWithValue("@tipo", telefono.TipodeTelefono);
-            command.Parameters.AddWithValue("@idPersona", telefono.IdPersona.IdPersona);
+        //    command.Parameters.AddWithValue("@idPersona", telefono.IdPersona.IdPersona);
             command.Parameters.AddWithValue("@estadoModificacion", 0);
 
             return command;
@@ -180,6 +180,50 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
                 cmd.Connection.Close();
             }
             return res;
+        }
+
+        
+        public static void InsertarConTransaccion(Telefono telefono, SqlTransaction transaccion, SqlConnection conexion)
+        {
+            Operaciones.WriteLogsDebug(NOMBREDAL, "Insertar", string.Format("{0} Info: {1}",
+            DateTime.Now.ToString(), "Empezando a ejecutar el metodo acceso a datos para crear un " + NOMBRE));
+
+            SqlCommand command = null;
+
+            //Consulta para insertar personas
+            string queryString = @"INSERT INTO Telefono(numeroTelefono, tipoTelefono, idPersona, estadoModificacion) 
+                                    VALUES(@numero, @tipo, @idPersona, @estadoModificacion)";
+
+            try
+            {
+                
+
+                command = OperacionesSql.CreateBasicCommandWithTransaction(queryString, transaccion, conexion);
+
+                command.Parameters.AddWithValue("@numero", telefono.NumeroTelefono);
+                command.Parameters.AddWithValue("@tipo", telefono.TipodeTelefono);
+                //command.Parameters.AddWithValue("@idPersona", 1);
+                //command.Parameters.AddWithValue("@idPersona", telefono.IdPersona.IdPersona);
+                command.Parameters.AddWithValue("@idPersona", OperacionesSql.GetActIdTable("Persona"));
+                command.Parameters.AddWithValue("@estadoModificacion", 0);
+
+                OperacionesSql.ExecuteBasicCommandWithTransaction(command);                
+
+            }
+            catch (SqlException ex)
+            {
+                Operaciones.WriteLogsRelease(NOMBREDAL, "Insertar", string.Format("{0} Error: {1}", DateTime.Now.ToString(), DateTime.Now.ToString(), ex.Message));
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                Operaciones.WriteLogsRelease(NOMBREDAL, "Insertar", string.Format("{0} Error: {1}", DateTime.Now.ToString(), DateTime.Now.ToString(), ex.Message));
+                throw ex;
+            }
+
+            Operaciones.WriteLogsDebug(NOMBREDAL, "Insertar", string.Format("{0} Info: {1}",
+                DateTime.Now.ToString(), DateTime.Now.ToString(),
+                "Termino de ejecutar  el metodo acceso a datos para insertar " + NOMBRE));
         }
     }
 }

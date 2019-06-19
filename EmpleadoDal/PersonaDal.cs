@@ -18,19 +18,27 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
         /// </summary>       
         /// <param name="idPersona"></param>
 
-        public static void Insertar(Persona persona)
+        public static void Insertar(Persona persona, Telefono telefono,Cuenta cuenta,DireccionPersona direccionPersona,Email email)
         {
             Operaciones.WriteLogsDebug(NOMBREDAL, "Insertar", string.Format("{0} Info: {1}",
             DateTime.Now.ToString(), "Empezando a ejecutar el metodo acceso a datos para crear una "+NOMBRE));
 
             SqlCommand command = null;
 
+            SqlConnection connection = OperacionesSql.ObtenerConexion();
+            SqlTransaction transaction = null;
+
             //Consulta para insertar telefonos
             string queryString = @"INSERT INTO Persona(nombres, primerApellido, segundoApellido, cargo, carnet, estadoModificacion, sexo) 
                                     VALUES(@nombres, @primerApellido,@segundoApellido, @cargo, @carnet, @estadoModificacion, @sexo)";
             try
             {
-                command = OperacionesSql.CreateBasicCommand(queryString);
+                connection.Open();
+                transaction = connection.BeginTransaction();
+
+                command = OperacionesSql.CreateBasicCommandWithTransaction(queryString, transaction, connection);
+
+
                 command.Parameters.AddWithValue("@nombres", persona.Nombres);
                 command.Parameters.AddWithValue("@primerApellido", persona.PrimerApellido);
                 command.Parameters.AddWithValue("@segundoApellido", persona.SegundoApellido);
@@ -38,7 +46,15 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
                 command.Parameters.AddWithValue("@carnet", persona.Carnet);
                 command.Parameters.AddWithValue("@estadoModificacion", 0);
                 command.Parameters.AddWithValue("@sexo", persona.Sexo);
-                OperacionesSql.ExecuteBasicCommand(command);
+
+                OperacionesSql.ExecuteBasicCommandWithTransaction(command);
+
+                TelefonoDal.InsertarConTransaccion(telefono, transaction, connection);
+                CuentaDal.InsertarConTransaccion(cuenta, transaction, connection);
+                DireccionPersonaDal.InsertarConTransaccion(direccionPersona, transaction, connection);
+                EmailDal.InsertarConTransaccion(email, transaction, connection);
+
+                transaction.Commit();
             }
             catch (SqlException ex)
             {
@@ -56,7 +72,7 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
                 "Termino de ejecutar  el metodo acceso a datos para insertar "+NOMBRE));
         }
 
-        public static void InsertarConTransaccion(Persona persona, SqlTransaction transaccion, SqlConnection conexion)
+        public static void InsertarConTransaccion(Persona persona, Telefono telefono, Cuenta cuenta, DireccionPersona direccionPersona, Email email, SqlTransaction transaccion, SqlConnection conexion)
         {
             Operaciones.WriteLogsDebug(NOMBREDAL, "Insertar", string.Format("{0} Info: {1}",
             DateTime.Now.ToString(), "Empezando a ejecutar el metodo acceso a datos para crear un persona"));
@@ -68,9 +84,11 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
                                     VALUES(@nombres, @primerApellido,@segundoApellido, @cargo, @carnet, @estadoModificacion, @sexo)";            
 
             try
-            {                
-                command = OperacionesSql.CreateBasicCommandWithTransaction(queryString, transaccion, conexion);
+            {
 
+                
+
+                command = OperacionesSql.CreateBasicCommandWithTransaction(queryString, transaccion, conexion);
                 command.Parameters.AddWithValue("@nombres", persona.Nombres);
                 command.Parameters.AddWithValue("@primerApellido", persona.PrimerApellido);
                 command.Parameters.AddWithValue("@segundoApellido", persona.SegundoApellido);
@@ -78,7 +96,12 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
                 command.Parameters.AddWithValue("@carnet", persona.Carnet);
                 command.Parameters.AddWithValue("@estadoModificacion", 0);
                 command.Parameters.AddWithValue("@sexo", persona.Sexo);
+
                 OperacionesSql.ExecuteBasicCommandWithTransaction(command);
+                TelefonoDal.InsertarConTransaccion(telefono, transaccion, conexion);
+                CuentaDal.InsertarConTransaccion(cuenta, transaccion, conexion);
+                DireccionPersonaDal.InsertarConTransaccion(direccionPersona, transaccion, conexion);
+                EmailDal.InsertarConTransaccion(email, transaccion, conexion);
 
             }
             catch (SqlException ex)
@@ -304,6 +327,44 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
             catch (Exception ex)
             {
                 Operaciones.WriteLogsRelease(NOMBREDAL, "buscar personas por primer apellido(Get)", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                throw ex;
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+            return personas_encontradas;
+        }
+
+        public static List<Persona> mostrar_todo_los_empleados()
+        {
+            List<Persona> personas_encontradas = new List<Persona>();
+            Persona res = new Persona();
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+            string query = @"SELECT * FROM Persona WHERE estadoModificacion = 0";
+            try
+            {
+                cmd = OperacionesSql.CreateBasicCommand(query);
+                dr = OperacionesSql.ExecuteDataReaderCommand(cmd);
+                while (dr.Read())
+                {
+                    res = new Persona()
+                    {
+                        IdPersona = dr.GetInt32(0),
+                        Nombres = dr.GetString(1),
+                        PrimerApellido = dr.GetString(2),
+                        SegundoApellido = dr.GetString(3),
+                        Cargo = dr.GetByte(4),
+                        Carnet = dr.GetString(5),
+                        Sexo = dr.GetByte(6)
+                    };
+                    personas_encontradas.Add(res);
+                }
+            }
+            catch (Exception ex)
+            {
+                Operaciones.WriteLogsRelease(NOMBREDAL, "buscar todas las personas(Get)", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
             finally

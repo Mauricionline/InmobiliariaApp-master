@@ -7,13 +7,45 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.ConsoleAppTelefono
     {
         static void Main(string[] args)
         {
-            Persona persona = new Persona()
+            Empleado persona = new Empleado()
             {
-                Nombres = "Jose Cristian",
-                PrimerApellido = "Almaraz",
-                SegundoApellido = "Sejas",
-                Carnet = "12345678",
+                Nombres = "Completo",
+                PrimerApellido = "completo",
+                SegundoApellido = "completo",
+                Carnet = "444123",
+                Cargo = 1,
+                Sexo = 1,
+                EstadoModificacion = 0,
+                Sueldo = 1000,
             };
+
+            Telefono telefono = new Telefono()
+            {
+                NumeroTelefono = 123,
+                IdPersona = 1,
+                TipodeTelefono = 1,
+                EstadoModificacion = 0
+            };
+
+            Cuenta cuenta = new Cuenta()
+            {
+                Usuario = "completo",
+                Contrasena = "12345",
+            };
+
+            DireccionPersona direccionPersona = new DireccionPersona()
+            {
+                NombreDireccion = "Av.Solomeo Paredes",
+            };
+
+            Email email = new Email()
+            {
+                CorreoEmail = "SolomeoParedes@gmail.com"
+            };
+
+            PersonaBrl.EmpleadosBrl.Insertar(persona, telefono, cuenta, direccionPersona, email);
+
+            //PersonaBrl.TelefonoBrl.Insertar(telefono);
 
             //PersonaBrl.PersonaBrl.Insertar(persona);
             //PersonaBrl.PersonaBrl.Eliminar(5);

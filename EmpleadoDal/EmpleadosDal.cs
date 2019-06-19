@@ -13,7 +13,7 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
         /// Inserta un Empleado a la base de datos 
         /// </summary>        
         /// <param name="Empleado"></param>
-        public static void Insertar(Empleado empleado)
+        public static void Insertar(Empleado empleado, Telefono telefono, Cuenta cuenta, DireccionPersona direccionPersona, Email email)
         {
             Operaciones.WriteLogsDebug(NOMBREDAL, "Insertar", string.Format("{0} Info: {1}",
             DateTime.Now.ToString(), "Empezando a ejecutar el metodo acceso a datos para crear un "+NOMBRE));
@@ -31,13 +31,14 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
                 connection.Open();
                 transaction = connection.BeginTransaction();
 
-                PersonaDal.InsertarConTransaccion(empleado as Persona, transaction, connection);
+                PersonaDal.InsertarConTransaccion(empleado as Persona, telefono, cuenta, direccionPersona, email, transaction, connection);
 
                 command = OperacionesSql.CreateBasicCommandWithTransaction(queryString, transaction, connection);
+
                 command.Parameters.AddWithValue("@idEmpleado", OperacionesSql.GetActIdTable("Persona"));
-                
                 command.Parameters.AddWithValue("@sueldo", empleado.Sueldo);
                 OperacionesSql.ExecuteBasicCommandWithTransaction(command);
+
 
                 transaction.Commit();
             }
@@ -126,11 +127,11 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
             try
             {
 
-                //command = OperacionesSql.CreateBasicCommand(queryString);
+                command = OperacionesSql.CreateBasicCommand(queryString);
                 //command.Parameters.AddWithValue("@nombre", empleado.Nombres);
                 //command.Parameters.AddWithValue("@tipo", empleado.TipodeTelefono);
                 //command.Parameters.AddWithValue("@idTelefono", empleado.IdTelefono);
-                //OperacionesSql.ExecuteBasicCommand(command);
+                OperacionesSql.ExecuteBasicCommand(command);
             }
             catch (SqlException ex)
             {

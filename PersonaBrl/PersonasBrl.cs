@@ -13,7 +13,7 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.PersonaBrl
         /// Metodo logica de negocio para insertar una Persona
         /// </summary>
         /// <param name="Persona"></param>
-        public static void Insertar(Persona persona)
+        public static void Insertar(Persona persona, Telefono telefono,Cuenta cuenta,DireccionPersona direccionPersona,Email email)
         {
             Operaciones.WriteLogsDebug(NOMBREBRL, "Insertar", string.Format("{0} Info: {1}",
             DateTime.Now.ToLongDateString(),
@@ -21,7 +21,7 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.PersonaBrl
 
             try
             {
-                EmpleadoDal.PersonaDal.Insertar(persona);
+                EmpleadoDal.PersonaDal.Insertar(persona, telefono, cuenta,direccionPersona,email);
 
             }
             catch (SqlException ex)
@@ -159,5 +159,28 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.PersonaBrl
             }
         }
 
+        public static List<Persona> mostrar_todo_los_empleados()
+        {
+            Operaciones.WriteLogsDebug(NOMBREBRL, "buscar personas por primer apellido", string.Format("{0} Info: {1}",
+            DateTime.Now.ToLongDateString(),
+            "Empezando a ejecutar el metodo logica de negocio para buscar personas por primer apellido " + NOMBRE));
+
+            try
+            {
+                return EmpleadoDal.PersonaDal.mostrar_todo_los_empleados();
+            }
+            catch (SqlException ex)
+            {
+                Operaciones.WriteLogsRelease(NOMBREBRL, "buscar personas por primer apellido", string.Format("{0} {1} Error: {2}",
+                    DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                Operaciones.WriteLogsRelease(NOMBREBRL, "buscar personas por primer apellido", string.Format("{0} {1} Error: {2}",
+                    DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                throw ex;
+            }
+        }
     }
 }
