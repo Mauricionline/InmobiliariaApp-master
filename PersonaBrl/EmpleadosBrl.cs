@@ -16,7 +16,7 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.PersonaBrl
         /// Metodo logica de negocio para insertar un telefono
         /// </summary>
         /// <param name="cuenta"></param>
-        public static void Insertar(Empleado empleado)
+        public static void Insertar(Empleado empleado, Telefono telefono, Cuenta cuenta, DireccionPersona direccionPersona, Email email)
         {
             Operaciones.WriteLogsDebug(NOMBREBRL, "Insertar", string.Format("{0} Info: {1}",
             DateTime.Now.ToLongDateString(),
@@ -24,7 +24,7 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.PersonaBrl
 
             try
             {
-                EmpleadoDal.EmpleadosDal.Insertar(empleado);
+                EmpleadoDal.EmpleadosDal.Insertar(empleado, telefono, cuenta, direccionPersona, email);
 
             }
             catch (SqlException ex)

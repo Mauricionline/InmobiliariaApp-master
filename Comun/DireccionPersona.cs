@@ -9,7 +9,7 @@
         /// <summary>
         /// id de la persona a la cual pertenece la direccion
         /// </summary>
-        public Persona IdPersona { get; set; }
+        public int IdPersona { get; set; }
 
         #endregion
     }

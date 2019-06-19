@@ -27,7 +27,7 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.Comun
         /// <summary>
         /// identificador de Persona
         /// </summary>
-        public Persona IdPersona { get; set; }
+        public int IdPersona { get; set; }
 
         /// <summary>
         /// Estado para sabes si es activo, inactivo,etc

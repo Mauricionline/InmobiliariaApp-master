@@ -9,7 +9,8 @@ using Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.Comun;
 namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
 {
     public class DireccionPersonaDal
-    {                   ///IMPORTANTE DEBO VERIFICAR SI LAS CONSULTAS ESTAN BIEN POR QUE YA NO ES DIRECCION AHORA ES DIRECCIONPERSONA
+    {   
+        ///IMPORTANTE DEBO VERIFICAR SI LAS CONSULTAS ESTAN BIEN POR QUE YA NO ES DIRECCION AHORA ES DIRECCIONPERSONA
         const string NOMBRE = "Direccion";
         const string NOMBREDAL = "DireccionDal";
         /// <summary>
@@ -30,7 +31,7 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
             {
                 command = OperacionesSql.CreateBasicCommand(queryString);
                 command.Parameters.AddWithValue("@nombreDireccion", direccionPersona.NombreDireccion);
-                command.Parameters.AddWithValue("@idPersona", direccionPersona.IdPersona.IdPersona);
+                //command.Parameters.AddWithValue("@idPersona", direccionPersona.IdPersona.IdPersona);
                 command.Parameters.AddWithValue("@estadoModificacion", 0);
                 OperacionesSql.ExecuteBasicCommand(command);
             }
@@ -67,7 +68,7 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
 
             command = new SqlCommand(queryString);
             command.Parameters.AddWithValue("@nombreDireccion", direccionPersona.NombreDireccion);
-            command.Parameters.AddWithValue("@idPersona", direccionPersona.IdPersona.IdPersona);            
+            //command.Parameters.AddWithValue("@idPersona", direccionPersona.IdPersona.IdPersona);            
             command.Parameters.AddWithValue("@estadoModificacion", 0);
 
             return command;
@@ -178,6 +179,44 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
                 cmd.Connection.Close();
             }
             return res;
+        }
+
+        public static void InsertarConTransaccion(DireccionPersona direccionPersona, SqlTransaction transaccion, SqlConnection conexion)
+        {
+            Operaciones.WriteLogsDebug("CuentaDal", "Insertar", string.Format("{0} Info: {1}",
+            DateTime.Now.ToString(), "Empezando a ejecutar el metodo acceso a datos para crear un " + "cuenta"));
+
+            SqlCommand command = null;
+
+            //Consulta para insertar personas
+            string queryString = @"INSERT INTO DireccionPersona(nombreDireccion, idPersona, estadoModificacion) 
+                                    VALUES(@nombreDireccion, @idPersona, @estadoModificacion)";
+
+            try
+            {
+                command = OperacionesSql.CreateBasicCommandWithTransaction(queryString, transaccion, conexion);
+
+                command.Parameters.AddWithValue("@nombreDireccion", direccionPersona.NombreDireccion);
+                command.Parameters.AddWithValue("@idPersona", OperacionesSql.GetActIdTable("Persona"));
+                command.Parameters.AddWithValue("@estadoModificacion", 0);
+
+                OperacionesSql.ExecuteBasicCommandWithTransaction(command);
+
+            }
+            catch (SqlException ex)
+            {
+                Operaciones.WriteLogsRelease("CuentaDal", "Insertar", string.Format("{0} Error: {1}", DateTime.Now.ToString(), DateTime.Now.ToString(), ex.Message));
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                Operaciones.WriteLogsRelease("CuentaDal", "Insertar", string.Format("{0} Error: {1}", DateTime.Now.ToString(), DateTime.Now.ToString(), ex.Message));
+                throw ex;
+            }
+
+            Operaciones.WriteLogsDebug("CuentaDal", "Insertar", string.Format("{0} Info: {1}",
+                DateTime.Now.ToString(), DateTime.Now.ToString(),
+                "Termino de ejecutar  el metodo acceso a datos para insertar " + "Cuenta"));
         }
     }
 }

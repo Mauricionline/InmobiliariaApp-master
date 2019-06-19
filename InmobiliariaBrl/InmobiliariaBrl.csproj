@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{3C903E9A-49A7-496E-AB02-349D03831F9A}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.InmobiliariaBrl</RootNamespace>
     <AssemblyName>Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.InmobiliariaBrl</AssemblyName>

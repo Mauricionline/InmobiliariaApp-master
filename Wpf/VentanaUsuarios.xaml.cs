@@ -22,21 +22,22 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.Wpf
     /// </summary>
     public partial class VentanaUsuarios : Window
     {
+        List<Persona> personas_encontradas;
         public VentanaUsuarios()
         {
             InitializeComponent();
+            mostrar_usuarios();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Inicio inicio = new Inicio();
-            inicio.Show();
-            this.Close();
+            inicio.Show();            
         }
 
         public void obtener_empleados_primer_apellido(string primer_apellido)
         {
-            List<Persona> personas_encontradas = PersonasBrl.buscar_persona_por_primer_apellido(primer_apellido);
+            personas_encontradas = PersonasBrl.buscar_persona_por_primer_apellido(primer_apellido);
             datagrid_Usuarios.ItemsSource = personas_encontradas;
         }
 
@@ -61,29 +62,32 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.Wpf
             Persona persona_boton = (Persona)((Button)e.Source).DataContext;
             VentanaModificarUsuario ventanaModificarUsuario = new VentanaModificarUsuario(persona_boton);
             ventanaModificarUsuario.Show();
-            this.Close();
+            
         }
 
         private void btn_detalle_usuario_Click(object sender, RoutedEventArgs e)
         {
             Persona persona_boton = (Persona)((Button)e.Source).DataContext;
-
-            
-            this.Close();
         }
 
         private void Btn_nuevo_usuario_Click(object sender, RoutedEventArgs e)
         {
             VentanaNuevoUsuario ventanaNuevoUsuario = new VentanaNuevoUsuario();
             ventanaNuevoUsuario.Show();
-            this.Close();
+            
         }
 
         private void Btn_nuevo_Empleado_Click(object sender, RoutedEventArgs e)
         {
             VentanaNuevoEmpleado ventanaNuevoEmpleado = new VentanaNuevoEmpleado();
             ventanaNuevoEmpleado.Show();
-            this.Close();
+            
+        }
+
+        private void mostrar_usuarios()
+        {
+            personas_encontradas = PersonasBrl.mostrar_todo_los_empleados();
+            datagrid_Usuarios.ItemsSource = personas_encontradas;
         }
     }
 }

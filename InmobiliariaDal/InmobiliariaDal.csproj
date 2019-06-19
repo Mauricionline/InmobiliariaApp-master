@@ -7,9 +7,9 @@
     <ProjectGuid>{76B255FF-A8BC-4425-8023-F1C39F321306}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.InmobiliariaDal</RootNamespace>
-    <AssemblyName>Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.InmobiliariaDal</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <RootNamespace>InmobiliariaDal</RootNamespace>
+    <AssemblyName>InmobiliariaDal</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
