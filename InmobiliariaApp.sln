@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InmobiliariaBrl", "Inmobili
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InmobiliariaDal", "InmobiliariaDal\InmobiliariaDal.csproj", "{76B255FF-A8BC-4425-8023-F1C39F321306}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServicioDal", "ServicioDal\ServicioDal.csproj", "{2B3A07FD-52FE-4C22-8F6E-EC8B33CB87F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{76B255FF-A8BC-4425-8023-F1C39F321306}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76B255FF-A8BC-4425-8023-F1C39F321306}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76B255FF-A8BC-4425-8023-F1C39F321306}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B3A07FD-52FE-4C22-8F6E-EC8B33CB87F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B3A07FD-52FE-4C22-8F6E-EC8B33CB87F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B3A07FD-52FE-4C22-8F6E-EC8B33CB87F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B3A07FD-52FE-4C22-8F6E-EC8B33CB87F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,6 +76,7 @@ Global
 		{F8472596-A29E-4A4B-883F-8D30F75CE7E9} = {6D59540A-4EBE-4D09-BB37-76D27645F37F}
 		{3C903E9A-49A7-496E-AB02-349D03831F9A} = {3715C8EC-CD67-4F9F-AFD2-75C6DC3BE1EB}
 		{76B255FF-A8BC-4425-8023-F1C39F321306} = {049BF105-D7B9-472E-A011-A339A7A11CC1}
+		{2B3A07FD-52FE-4C22-8F6E-EC8B33CB87F3} = {049BF105-D7B9-472E-A011-A339A7A11CC1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {062C41D0-1B0E-458C-B3A3-469573FF3B17}

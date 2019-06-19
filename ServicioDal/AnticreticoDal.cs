@@ -1,21 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Base;
+using System;
+using System.Data.SqlClient;
+using Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.Comun;
 
-namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.InmobiliariaDal
+namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.ServicioDal
 {
-    public class DepartamentoDal
+    public class AnticreticoDal
     {
-        const string NOMBRE = "Departamento";
-        const string NOMBREDAL = "DepartamentoDal";
+        const string NOMBRE = "Anticretico";
+        const string NOMBREDAL = "AnticreticoDal";
 
         /// <summary>
         /// Inserta un Dapartamento a la base de datos 
         /// </summary>        
-        /// <param name="Departamento"></param>
-        public static void Insertar(Departamento departamento)
+        /// <param name="Anticretico"></param>
+        public static void Insertar(Anticretico anticretico)
         {
             Operaciones.WriteLogsDebug(NOMBREDAL, "Insertar", string.Format("{0} Info: {1}",
             DateTime.Now.ToString(), "Empezando a ejecutar el metodo acceso a datos para crear un " + NOMBRE));
@@ -23,8 +22,8 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.InmobiliariaDal
             SqlCommand command = null;
 
             //Consulta para insertar Empleado
-            string queryString = @"INSERT INTO Departamento(IdInmueble, NumPiso,Ascensor,DepartamentoPorPiso) 
-                                    VALUES(@IdInmueble, @NumPiso,@Ascensor,@DepartamentoPorPiso.)";
+            string queryString = @"INSERT INTO Anticretico(idServicio, tiempoAnticreticoAnios) 
+                                    VALUES(@idServicio, @tiempoAnticreticoAnios)";
 
             SqlConnection connection = OperacionesSql.ObtenerConexion();
             SqlTransaction transaction = null;
@@ -33,14 +32,11 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.InmobiliariaDal
                 connection.Open();
                 transaction = connection.BeginTransaction();
 
-                InmobiliariaDal.InsertarConTransaccion(empleado as Inmueble, transaction, connection);
+                ServicioDal.InsertarTransaccion(anticretico as Servicio, transaction, connection);
 
                 command = OperacionesSql.CreateBasicCommandWithTransaction(queryString, transaction, connection);
-                command.Parameters.AddWithValue("@IdInmueble", OperacionesSql.GetActIdTable("Inmueble"));
-                command.Parameters.AddWithValue("@NumPiso", departamento.Numpiso);
-                command.Parameters.AddWithValue("@Ascensor", departamento.Ascensor);
-                command.Parameters.AddWithValue("@DepartamentoPorPiso", departamento.DepartamentoPorPiso);
-
+                command.Parameters.AddWithValue("@idServicio", OperacionesSql.GetActIdTable("Servicio"));
+                command.Parameters.AddWithValue("@tiempoAnticreticoAnios", anticretico.tiempoAnticreticoAnios);
                 OperacionesSql.ExecuteBasicCommandWithTransaction(command);
 
                 transaction.Commit();
@@ -77,8 +73,8 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.InmobiliariaDal
             SqlCommand command = null;
 
             // Proporcionar la cadena de consulta 
-            string queryString = @"UPDATE Departamento SET estadoModificacion=1
-                                    WHERE IdInmueble = @IdInmueble";
+            string queryString = @"UPDATE Anticretico SET estadoModificacion=1
+                                    WHERE idServicio = @idServicio";
 
             //Declaro e inicio la conexion
             SqlConnection conexion = OperacionesSql.ObtenerConexion();
@@ -94,7 +90,7 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.InmobiliariaDal
                 command = OperacionesSql.CreateBasicCommandWithTransaction(queryString, transaccion, conexion);
                 command.Parameters.AddWithValue("@id", id);
 
-                PersonaDal.EliminarConTransaccion(id, transaccion, conexion);
+                ServicioDal.EliminarPorIdServicioConTransaccion(id, transaccion, conexion);
 
                 OperacionesSql.ExecuteBasicCommandWithTransaction(command);
 
@@ -117,16 +113,16 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.InmobiliariaDal
         /// <summary>
         /// Actualiza Departamento de la base de datos
         /// </summary>
-        /// <param name="Departamento"></param>
-        public static void Actualizar(Departamento departamento)
+        /// <param name="Anticretico"></param>
+        public static void Actualizar(Anticretico anticretico)
         {
             Operaciones.WriteLogsDebug(NOMBREDAL, "Eliminar", string.Format("{0} Info: {1}", DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para eliminar un Telefono"));
 
             SqlCommand command = null;
 
             // Proporcionar la cadena de consulta 
-            string queryString = @"UPDATE Departmanto SET NumPiso=@NumPiso, Ascensor=@Ascensor, DepartamentoPorPiso=@DepartamentoPorPiso
-                                    WHERE idTelefono=@idTelefono";
+            string queryString = @"UPDATE Anticretico SET tiempoAnticreticoAnios=@tiempoAnticreticoAnios
+                                    WHERE IdServicio=@IdServicio";
             try
             {
 
@@ -156,12 +152,12 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.InmobiliariaDal
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static Departamento Obtener(int id)
+        public static Anticretico Obtener(int id)
         {
-            Departmanrto res = new Departmanrto();
+            Anticretico res = new Anticretico();
             SqlCommand cmd = null;
             SqlDataReader dr = null;
-            string query = @"SELECT NumPiso, Ascensor, DepartamentoPorPiso FROM Departmaento
+            string query = @"SELECT tiempoAnticreticoAnios FROM Anticretico
                             INNER JOIN inmueble ON Departmaento.IdDepartmanto = Inmueble.IdInmueble
                             WHERE idDeartamento = @id";
             try
@@ -171,12 +167,10 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.InmobiliariaDal
                 dr = OperacionesSql.ExecuteDataReaderCommand(cmd);
                 while (dr.Read())
                 {
-                    res = new Departmanrto()
+                    res = new Anticretico()
                     {
-                        NumPiso = dr.GetByte(0),
-                        Ascensor = dr.GetBool(1),
-                        DepartamentoPorPiso = dr.GetByte(2)
-                        
+                        tiempoAnticreticoAnios = dr.GetByte(1),
+
                     };
                 }
             }
@@ -193,4 +187,3 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.InmobiliariaDal
         }
     }
 }
-
