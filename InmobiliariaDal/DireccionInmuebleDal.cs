@@ -12,8 +12,8 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.InmobiliariaDal
     {
 
         ///IMPORTANTE DEBO VERIFICAR SI LAS CONSULTAS ESTAN BIEN POR QUE YA NO ES DIRECCION AHORA ES DIRECCIONPERSONA
-        const string NOMBRE = "Direccion";
-        const string NOMBREDAL = "InmuebleDal";
+        const string NOMBRE = "DireccionInmueble";
+        const string NOMBREDAL = "DireccionInmuebleDal";
         /// <summary>
         /// Inserta un telefono a la base de datos 
         /// </summary>
@@ -28,53 +28,118 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.InmobiliariaDal
             //Consulta para insertar Direccion
             string queryString = @"INSERT INTO DireccionInmueble(nombreDireccion, IdInmueble, estadoModificacion) 
                                     VALUES(@nombreDireccion, @IdInmueble, @estadoModificacion)";
+            // Declaro e inicio la conexion
+            SqlConnection conexion = OperacionesSql.ObtenerConexion();
+
+            //    Declaro la transaccion
+              SqlTransaction transaccion = null;
             try
             {
-                command = OperacionesSql.CreateBasicCommand(queryString);
+                //   Abro la conexion a la base de datos
+                conexion.Open();
+
+                //        Inicio la transaccion
+                transaccion = conexion.BeginTransaction();
+                command = OperacionesSql.CreateBasicCommandWithTransaction(queryString, transaccion, conexion);
+                if (direccionInmueble.Inmueble != null)
+                {
+                    InmuebleDal.InsertarTransaccion(direccionInmueble.Inmueble, transaccion, conexion);
+                    command.Parameters.AddWithValue("@IdInmueble", direccionInmueble.Inmueble.IdInmueble);
+                }
+                else
+                {
+                    command.Parameters.AddWithValue("@IdInmueble", null);
+                }
+
                 command.Parameters.AddWithValue("@nombreDireccion", direccionInmueble.NombreDireccion);
                 command.Parameters.AddWithValue("@idInmueble", direccionInmueble.IdInmueble.idInmueble);
                 command.Parameters.AddWithValue("@estadoModificacion", 0);
-                OperacionesSql.ExecuteBasicCommand(command);
+                OperacionesSql.ExecuteBasicCommandWithTransaction(command);
+        //        Insertar telefonos
+        ////        foreach (Telefono telf in persona.Telefonos)
+        ////        {
+        ////            TelefonoDal.InsertarConTransaccion(telf, transaccion, conexion);
+        ////        }
+        ////        transaccion.Commit();
             }
             catch (SqlException ex)
             {
-                Operaciones.WriteLogsRelease(NOMBREDAL, "Insertar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToString(), DateTime.Now.ToString(), ex.Message));
+                Operaciones.WriteLogsRelease(NOMBREDAL, "DireccionInmuebleDal", string.Format("{0} {1} Error: {2}", DateTime.Now.ToString(), DateTime.Now.ToString(), ex.Message));
                 throw ex;
             }
             catch (Exception ex)
             {
-                Operaciones.WriteLogsRelease(NOMBREDAL, "Insertar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToString(), DateTime.Now.ToString(), ex.Message));
+                Operaciones.WriteLogsRelease(NOMBREDAL, "DireccionInmuebleDal", string.Format("{0} {1} Error: {2}", DateTime.Now.ToString(), DateTime.Now.ToString(), ex.Message));
                 throw ex;
             }
-
+            finally
+            {
+                conexion.Close();
+            }
             Operaciones.WriteLogsDebug(NOMBREDAL, "Insertar", string.Format("{0} {1} Info: {2}",
                 DateTime.Now.ToString(), DateTime.Now.ToString(),
                 "Termino de ejecutar  el metodo acceso a datos para insertar " + NOMBRE));
         }
 
-        /// <summary>
-        /// Inserta una direccion a la base de datos y devuelve el ID, aparte me devuelve el comando
-        /// </summary>
-        /// <param name="Direccion"></param>        
-        public static SqlCommand InsertarOUTPUT(DireccionInmueble direccionInmueble)
+        ///// <summary>
+        ///// Inserta una DireccionInueble a la base de datos 
+        ///// </summary>
+        ///// <param name="persona"></param>
+        public static void InsertarConTransaccion(Persona persona, SqlTransaction transaccion, SqlConnection conexion)
         {
-            Operaciones.WriteLogsDebug(NOMBREDAL, "Insertar", string.Format("{0} Info: {1}",
-            DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para crear una " + NOMBRE));
-
+            Operaciones.WriteLogsDebug("DireccionInmuebleDal", "Insertar", string.Format("{0} Info: {1}",
+            DateTime.Now.ToString(), "Empezando a ejecutar el metodo acceso a datos para crear un DireccionInmueble"));
             SqlCommand command = null;
-
-            //Consulta para insertar telefonos
+            //Consulta para insertar DireccionInmueble
             string queryString = @"INSERT INTO DireccionInmueble(nombreDireccion, IdInmueble, estadoModificacion) 
                                     VALUES(@nombreDireccion, @IdInmueble, @estadoModificacion)";
 
-            command = new SqlCommand(queryString);
-            command.Parameters.AddWithValue("@nombreDireccion", direccionInmueble.NombreDireccion);
-            command.Parameters.AddWithValue("@idPersona", direccionInmueble.IdInmueble.idInmueble);
-            command.Parameters.AddWithValue("@estadoModificacion", 0);
 
-            return command;
+            try
+            {
+                command = OperacionesSql.CreateBasicCommandWithTransaction(queryString, transaccion, conexion);
+                if (direccionInmueble.Inmueble != null)
+                {
+                    InmuebleDal.InsertarTransaccion(direccionInmueble.Inmueble, transaccion, conexion);
+                    command.Parameters.AddWithValue("@IdInmueble", direccionInmueble.Inmueble.IdInmueble);
+                }
+                else
+                {
+                    command.Parameters.AddWithValue("@IdInmueble", null);
+                }
 
+                command.Parameters.AddWithValue("@nombreDireccion", direccionInmueble.NombreDireccion);
+                command.Parameters.AddWithValue("@idInmueble", direccionInmueble.IdInmueble.idInmueble);
+                command.Parameters.AddWithValue("@estadoModificacion", 0);
+                OperacionesSql.ExecuteBasicCommandWithTransaction(command);
+                //        Insertar telefonos
+                ////        foreach (Telefono telf in persona.Telefonos)
+                ////        {
+                ////            TelefonoDal.InsertarConTransaccion(telf, transaccion, conexion);
+                ////        }
+                ////        transaccion.Commit();
+            }
+            catch (SqlException ex)
+            {
+                Operaciones.WriteLogsRelease(NOMBREDAL, "DireccionInmuebleDal", string.Format("{0} {1} Error: {2}", DateTime.Now.ToString(), DateTime.Now.ToString(), ex.Message));
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                Operaciones.WriteLogsRelease(NOMBREDAL, "DireccionInmuebleDal", string.Format("{0} {1} Error: {2}", DateTime.Now.ToString(), DateTime.Now.ToString(), ex.Message));
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+            Operaciones.WriteLogsDebug(NOMBREDAL, "Insertar", string.Format("{0} {1} Info: {2}",
+                DateTime.Now.ToString(), DateTime.Now.ToString(),
+                "Termino de ejecutar  el metodo acceso a datos para insertar " + NOMBRE));
         }
+ 
+
+
 
         /// <summary>
         /// Elimina Direccion de la base de datos
@@ -108,6 +173,40 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.InmobiliariaDal
 
             Operaciones.WriteLogsDebug(NOMBREDAL, "Eliminar", string.Format("{0} {1} Info: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Termino de ejecutar  el metodo acceso a datos para Eliminar una" + NOMBRE));
         }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name = "IdInmueble" ></ param >
+        public static void EliminarPorIdDireccionInmuebleTransaccion(int IdInmueble, SqlTransaction transaccion, SqlConnection conexion)
+        {
+            Operaciones.WriteLogsDebug("InmuebleDal", "EliminarPorIdInmeble", string.Format("{0} Info: {1}", DateTime.Now.ToString(), "Empezando a ejecutar el metodo acceso a datos para eliminar un Usuario"));
+            SqlCommand command = null;
+            string queryString = @"UPDATE DireccionPersona SET estadoModificacion=1
+                                    WHERE idInmueble =  (Select IdInmueble FROM DireccionInmueble WHERE IdInmueble = @IdInmueble)";
+
+            try
+            {
+                command = OperacionesSql.CreateBasicCommandWithTransaction(queryString, transaccion, conexion);
+                command.Parameters.AddWithValue("@IdInmueble", IdInmueble);
+                OperacionesSql.ExecuteBasicCommandWithTransaction(command);
+            }
+            catch (SqlException ex)
+            {
+                Operaciones.WriteLogsRelease("InmuebleDal", "EliminarPorIdInmeble", string.Format("{0} {1} Error: {1}", DateTime.Now.ToString(), DateTime.Now.ToString(), ex.Message));
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                Operaciones.WriteLogsRelease("InmuebleDal", "EliminarPorIdInmeble", string.Format("{0} {1} Error: {1}", DateTime.Now.ToString(), DateTime.Now.ToString(), ex.Message));
+                throw ex;
+            }
+
+            Operaciones.WriteLogsDebug("InmuebleDal", "EliminarPorIdInmeble", string.Format("{0} {1} Info: {1}", DateTime.Now.ToString(), DateTime.Now.ToString(), "Termino de ejecutar  el metodo acceso a datos para Eliminar un Cliente"));
+        }
+
+
 
         /// <summary>
         /// Actualiza telefono de la base de datos
@@ -145,17 +244,19 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.InmobiliariaDal
 
         }
 
+
+
         /// <summary>
-        /// Obtiene una Direccion de la base de datos
+        /// Obtiene un Persona de la base de datos
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static Direccion Obtener(int id)
+        public static DireccionInmueble Obtener(int id)
         {
-            DireccionInmueble res = new DireccionInmueble();
+            DireccionInmueble direccionInmueble = new DireccionInmueble();
             SqlCommand cmd = null;
             SqlDataReader dr = null;
-            string query = @"SELECT * FROM DireccionPersona WHERE idDireccion=@id and estadoModificacion=0";
+            string query = @"SELECT * FROM DireccionInmueble WHERE IdInmueble=@id and estadoModificacion=0";
             try
             {
                 cmd = OperacionesSql.CreateBasicCommand(query);
@@ -163,24 +264,28 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.InmobiliariaDal
                 dr = OperacionesSql.ExecuteDataReaderCommand(cmd);
                 while (dr.Read())
                 {
-                    res = new DireccionInmueble()
+                    DireccionInmueble = new DireccionInmueble()
                     {
-                        IdDireccion = dr.GetInt32(0),
-                        NombreDireccion = dr.GetString(1),
+                        IdInmueble = dr.GetInt32(0),
+                        Inmueble = InmuebleDal.Obtener(dr.GetInt32(2)),
+                        estadoModificacion = dr.GetBoolean()
                     };
+
                 }
             }
             catch (Exception ex)
             {
-                Operaciones.WriteLogsRelease(NOMBREDAL, "Obtenet(Get)", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                Operaciones.WriteLogsRelease("DireccionInmuebleDal", "Obtenet(Get)", string.Format("{0} Error: {1}", DateTime.Now.ToString(), ex.Message));
                 throw ex;
             }
             finally
             {
                 cmd.Connection.Close();
             }
-            return res;
+            return persona;
         }
+
+       
     }
 }
 

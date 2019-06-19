@@ -51,6 +51,7 @@
     <Compile Include="CuentaEmpleado.cs" />
     <Compile Include="Departamento.cs" />
     <Compile Include="Direccion.cs" />
+    <Compile Include="DireccionFotos.cs" />
     <Compile Include="DireccionInmueble.cs" />
     <Compile Include="DireccionPersona.cs" />
     <Compile Include="Email.cs" />

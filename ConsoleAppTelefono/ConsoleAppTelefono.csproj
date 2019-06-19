@@ -57,10 +57,6 @@
       <Project>{5cd40e75-8749-4c5d-862b-24b5e6ec7a3e}</Project>
       <Name>Comun</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EmpleadoDal\EmpleadoDal.csproj">
-      <Project>{9b4b97b2-6a91-49f9-b132-820f90dd8028}</Project>
-      <Name>EmpleadoDal</Name>
-    </ProjectReference>
     <ProjectReference Include="..\PersonaBrl\PersonaBrl.csproj">
       <Project>{d1979cde-fbb6-4497-a4ac-ef062adff11c}</Project>
       <Name>PersonaBrl</Name>

@@ -13,7 +13,6 @@ namespace Univalle.Fie.Sistemas.BaseDatosII.InmobiliariaApp.EmpleadoDal
         /// <summary>
         /// Inserta un telefono a la base de datos 
         /// </summary>
-        /// <param name="telefono"></param>
         /// <param name="idPersona"></param>
         public static void Insertar(Email email)
         {

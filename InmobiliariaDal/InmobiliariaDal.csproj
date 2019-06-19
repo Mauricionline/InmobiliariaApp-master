@@ -42,8 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CasaDal.cs" />
+    <Compile Include="CiudadDal.cs" />
+    <Compile Include="DepartamentoDal.cs" />
     <Compile Include="DireccionInmuebleDal.cs" />
+    <Compile Include="FotosDal.cs" />
     <Compile Include="InmuebleDal.cs" />
+    <Compile Include="InmuebleEdificadoDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
